@@ -464,7 +464,7 @@ blockquote {
 }
 pre, code {
   white-space: pre-wrap;
-  word-break: keep-all;
+  word-break: break-word;
 }
 table {
   max-width: 100%;
@@ -521,7 +521,7 @@ table {
 }
 .markdown {
   white-space: normal;
-  word-break: keep-all;
+  word-break: break-word;
 }
 .markdown blockquote,
 .reply-quote,
@@ -622,7 +622,7 @@ img.pil {
 }
 @media (max-width: 720px) {
   .markdown, .reply-content, .topic-richtext, .ref-content, p, div, span {
-    word-break: keep-all !important;
+    word-break: break-word !important;
     white-space: normal !important;
   }
   html {
@@ -655,7 +655,6 @@ img.pil {
   }
   .comment-item > .reply-doc,
   #topic-content.topic-content > .topic-doc {
-    display: contents;
   }
   .comment-item .bg-img-green,
   #topic-content.topic-content .topic-meta,
