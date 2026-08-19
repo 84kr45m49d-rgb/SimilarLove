@@ -46,7 +46,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
         .post-item:hover {
             background: #f5f5f7;
@@ -78,24 +78,24 @@
             .header h1 { font-size: 20px; }
             .post-item { padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
         }
-        .post-item .date {
+        .post-item .date { flex-shrink: 0;
             font-size: 13px;
             background: #e8f5e9;
             color: #2e7d32;
             padding: 2px 14px;
             border-radius: 20px;
             white-space: nowrap;
-            margin-left: 16px;
+            margin-left: 0; margin-top: 2px;
             font-weight: 500;
         }
-        .post-item .date {
+        .post-item .date { flex-shrink: 0;
             font-size: 13px;
             background: #e8f5e9;
             color: #2e7d32;
             padding: 2px 14px;
             border-radius: 20px;
             white-space: nowrap;
-            margin-left: 16px;
+            margin-left: 0; margin-top: 2px;
             font-weight: 500;
         }
     </style>
