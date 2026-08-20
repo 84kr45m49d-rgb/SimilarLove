@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>碎片 · 灯牌雨</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500;700;900&display=swap');
+    :root{--cyan:#00f6ff;--pink:#ff176f;--violet:#8b4dff;--acid:#b7ff00;--bg:#03040a}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
+    body{position:relative;color:#dcecff;font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;user-select:none;isolation:isolate}
+
+    /* 城市夜景 + 霓虹雾 */
+    .city{position:fixed;inset:0;z-index:-20;overflow:hidden;background:
+    radial-gradient(ellipse at 50% 35%,rgba(26,18,60,.55),transparent 55%),
+    radial-gradient(ellipse at 15% 65%,rgba(0,246,255,.10),transparent 38%),
+    radial-gradient(ellipse at 85% 45%,rgba(255,23,111,.11),transparent 40%),
+    linear-gradient(#02030a 0%,#060814 58%,#09030d 100%)}
+    .city:before{content:"";position:absolute;left:-10%;right:-10%;bottom:-3%;height:52%;opacity:.8;background:
+    linear-gradient(90deg,transparent 0 2%,#070a13 2% 7%,transparent 7% 9%,#050711 9% 15%,transparent 15% 17%,#080914 17% 22%,transparent 22% 25%,#05060f 25% 31%,transparent 31% 34%,#070812 34% 42%,transparent 42% 45%,#050711 45% 51%,transparent 51% 54%,#080813 54% 61%,transparent 61% 64%,#05060f 64% 70%,transparent 70% 73%,#080914 73% 81%,transparent 81% 84%,#05060e 84% 92%,transparent 92%),
+    repeating-linear-gradient(90deg,transparent 0 20px,rgba(0,246,255,.06) 20px 22px,transparent 22px 42px);
+    filter:drop-shadow(0 -20px 40px rgba(0,0,0,.9));transform:perspective(500px) rotateX(7deg)}
+    .city:after{content:"";position:absolute;left:-10%;width:120%;bottom:-25%;height:45%;background:
+    linear-gradient(rgba(0,246,255,.14),rgba(0,246,255,0) 2px),
+    repeating-linear-gradient(90deg,rgba(0,246,255,.12) 0 1px,transparent 1px 90px);
+    background-size:100% 48px,90px 100%;transform:perspective(300px) rotateX(58deg);transform-origin:bottom;opacity:.24;mask-image:linear-gradient(to top,black,transparent 78%)}
+    .haze{position:fixed;inset:0;z-index:-10;pointer-events:none;background:radial-gradient(circle at 20% 50%,rgba(0,246,255,.08),transparent 28%),radial-gradient(circle at 80% 45%,rgba(255,23,111,.08),transparent 30%);mix-blend-mode:screen;animation:haze 8s ease-in-out infinite alternate}
+    @keyframes haze{from{opacity:.55}to{opacity:1}}
+
+    /* CRT / 扫描线 */
+    .crt{position:fixed;inset:0;z-index:1000;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 4px),linear-gradient(90deg,rgba(255,0,80,.018),transparent 35%,rgba(0,240,255,.018));mix-blend-mode:screen}
+    .crt:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.48) 100%)}
+
+    /* HUD */
+    .nav-bar{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:200;display:flex;align-items:center;gap:12px;padding:7px 14px;border:1px solid rgba(0,246,255,.42);border-radius:3px;background:rgba(2,5,12,.72);box-shadow:0 0 14px rgba(0,246,255,.12),inset 0 0 18px rgba(0,246,255,.035);backdrop-filter:blur(8px);font-size:11px;letter-spacing:2px;text-transform:uppercase}
+    .nav-bar:before{content:"SYSTEM // ONLINE";position:absolute;left:-1px;top:-18px;color:rgba(0,246,255,.58);font-size:8px;letter-spacing:2px}
+    .nav-bar a{color:#a7b7c8;text-decoration:none}.nav-bar a:hover{color:var(--cyan);text-shadow:0 0 12px var(--cyan)}
+    .nav-bar .highlight{color:var(--cyan);text-shadow:0 0 8px var(--cyan),0 0 20px rgba(0,246,255,.45)}
+    .side-sign{position:fixed;z-index:1;writing-mode:vertical-rl;letter-spacing:5px;font-size:10px;color:rgba(0,246,255,.45);border-left:1px solid rgba(0,246,255,.28);padding:12px 8px;text-shadow:0 0 8px currentColor;opacity:.65}
+    .side-sign.left{left:18px;top:30%}.side-sign.right{right:18px;top:54%;color:rgba(255,23,111,.45);border-left-color:rgba(255,23,111,.28)}
+
+    /* 雨 */
+    .rain{position:fixed;inset:-20% 0 0;z-index:0;pointer-events:none;opacity:.26;background-image:repeating-linear-gradient(108deg,transparent 0 22px,rgba(170,235,255,.22) 23px,transparent 24px 62px);background-size:130px 150px;animation:rain 1.2s linear infinite;mask-image:linear-gradient(to bottom,transparent,black 12%,black 80%,transparent)}
+    @keyframes rain{to{background-position:-90px 150px}}
+
+    /* 灯牌 */
+    .falling-text{position:fixed;z-index:5;white-space:nowrap;pointer-events:auto;font-weight:900;font-size:clamp(30px,4.4vw,60px);letter-spacing:3px;padding:7px 18px 8px;color:#f4f7ff;background:linear-gradient(180deg,rgba(255,255,255,.055),transparent 35%),rgba(0,2,7,.96);border:1px solid currentColor;border-radius:2px;text-shadow:0 1px 2px #000,0 0 2px currentColor,0 0 8px currentColor,0 0 20px currentColor;box-shadow:inset 0 0 22px rgba(255,255,255,.025),inset 0 0 45px rgba(0,0,0,.45),0 0 6px currentColor,0 0 18px rgba(0,0,0,.9);will-change:transform,opacity,filter;transition:filter .18s,box-shadow .18s,text-shadow .18s;clip-path:polygon(0 0,100% 0,100% calc(100% - 7px),calc(100% - 10px) 100%,0 100%)}
+    .falling-text{-webkit-text-stroke:.25px rgba(255,255,255,.35)}
+    .falling-text:before{content:"";position:absolute;left:7px;right:7px;top:4px;height:1px;background:currentColor;opacity:.55;box-shadow:0 0 8px currentColor}
+    .falling-text:after{content:"NEON//";position:absolute;right:8px;bottom:-14px;font-size:6px;letter-spacing:2px;color:currentColor;opacity:.5}
+    .falling-text.flicker{animation:flicker 3.8s steps(1,end) infinite}
+    @keyframes flicker{0%,7%,9%,61%,64%,100%{opacity:var(--base-opacity);filter:none}8%,62%{opacity:.18;filter:brightness(.65)}63%{opacity:.95;filter:brightness(1.8)}}
+    .falling-text:hover{z-index:50;filter:brightness(1.65) saturate(1.25);text-shadow:0 1px 2px #000,0 0 3px currentColor,0 0 10px currentColor,0 0 25px currentColor,0 0 55px currentColor;box-shadow:inset 0 0 30px rgba(255,255,255,.035),0 0 15px currentColor,0 0 55px currentColor}
+
+    /* 底部 */
+    .footer-note{position:fixed;left:50%;bottom:15px;transform:translateX(-50%);z-index:200;color:rgba(0,246,255,.38);font-size:8px;letter-spacing:3px;white-space:nowrap}
+    .footer-note span{color:rgba(255,23,111,.55)}
+    @media(max-width:640px){.nav-bar{top:10px;font-size:9px;padding:6px 10px;gap:8px;letter-spacing:1px}.nav-bar:before{display:none}.side-sign{display:none}.falling-text{font-size:clamp(22px,7.2vw,34px);letter-spacing:1px;padding:5px 10px 6px}.falling-text:after{display:none}.footer-note{font-size:7px;bottom:9px;letter-spacing:2px}}
+  </style>
+</head>
+<body>
+<div class="city"></div><div class="haze"></div><div class="rain"></div><div class="crt"></div>
+<div class="nav-bar"><a href="#">⌂ 首页</a><span style="color:var(--pink)">◆</span><span class="highlight">⚡ 灯牌雨</span></div>
+<div class="side-sign left">ARCHIVE // MEMORY // 07</div>
+<div class="side-sign right">SIGNAL // FRAGMENT // LOST</div>
+<div class="footer-note"><span>●</span> NEON ARCHIVE · SIGNAL ACTIVE · HOVER TO SCAN</div>
+<script>
+  (function(){
+    const quotes = [
+      "db 微博b站抖音红书还有离谱的音乐全平台网暴", "她的爱永远拿得出手", "老子跟你没完", "私下冷暴力逼分手",
+      "亏了十个嘉年华", "幸好没送20w的项链和Yu7", "不知道要当多少次冤大头", "老粉都知道",
+      "腱鞘炎纱布长这样？", "🇭🇰演唱会好看吗", "依旧不会为自己辩解并会全揽致歉一切", "吃喝玩乐贪吃鬼天天吃没有放弃过一丁点流量和钱",
+      "大闲人一个召之即来挥之即去", "绝了这个歪屁股", "装逼自己跳出来", "还好我没有这种",
+      "又暗上了", "还好我还有这种"
+    ];
+
+    const colors=['#00f6ff','#00d9ff','#ff176f','#ff2d8b','#8b4dff','#b56cff','#b7ff00'];
+    const particles=[];
+    const W=()=>window.innerWidth, H=()=>window.innerHeight;
+    const pick=a=>a[Math.floor(Math.random()*a.length)];
+    const random=(min,max)=>min+Math.random()*(max-min);
+
+    function createParticle(text){
+      const el=document.createElement('div');
+      el.className='falling-text'+(Math.random()>.45?' flicker':'');
+      el.textContent=text;
+      el.style.color=pick(colors);
+      el.style.setProperty('--base-opacity',random(.58,.9).toFixed(2));
+
+      const x=random(-30,Math.max(40,W()-100));
+      const y=random(-H()*.9,-80);
+      const speed=random(1.2, 2.0);
+      const drift=random(.04,.18);
+      const scale=random(.76,1.12);
+      const rotate=random(-2.2,2.2);
+      let currentX=x,currentY=y,phase=random(0,Math.PI*2),hover=false;
+
+      el.style.left=x+'px'; el.style.top=y+'px';
+      document.body.appendChild(el);
+
+      el.addEventListener('mouseenter',()=>{hover=true;el.style.opacity='1'});
+      el.addEventListener('mouseleave',()=>{hover=false});
+
+      function update(){
+        if(!hover){
+          currentY+=speed; phase+=drift; currentX+=Math.sin(phase)*.28;
+          if(currentY>H()+120){
+            currentY=random(-260,-70); currentX=random(-30,Math.max(40,W()-100)); phase=random(0,Math.PI*2);
+            el.style.color=pick(colors);
+          }
+        }
+        el.style.transform=`translate3d(${currentX-x}px,${currentY-y}px,0) scale(${scale}) rotate(${rotate}deg)`;
+      }
+      return {update,el};
+    }
+
+    quotes.forEach(q=>{if(Math.random()<.42) particles.push(createParticle(q));});
+
+    function animate(){particles.forEach(p=>p.update());requestAnimationFrame(animate)}
+    animate();
+
+    window.addEventListener('resize', ()=>{
+      const w = W(), h = H();
+      particles.forEach(p=>{
+        const rect = p.el.getBoundingClientRect();
+        if(rect.left > w + 50 || rect.right < -50 || rect.top > h + 50){
+          p.el.style.left = random(-30, Math.max(40, w-100)) + 'px';
+          p.el.style.top = random(-260, -70) + 'px';
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
