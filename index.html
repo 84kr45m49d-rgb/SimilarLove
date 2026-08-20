@@ -19,7 +19,6 @@
             overflow-x: hidden;
         }
 
-        /* ===== 蓝天白云背景 ===== */
         body::before {
             content: '';
             position: fixed;
@@ -31,7 +30,6 @@
             z-index: -2;
         }
 
-        /* ===== 云朵 ===== */
         .cloud {
             position: fixed;
             font-size: 55px;
@@ -48,7 +46,6 @@
             100% { transform: translateX(80px); }
         }
 
-        /* ===== 哆啦A梦大主角（显眼！） ===== */
         .doraemon-big {
             position: fixed;
             bottom: 20px;
@@ -65,7 +62,6 @@
             50% { transform: translateX(-50%) translateY(-15px) rotate(-3deg); }
         }
 
-        /* ===== 竹蜻蜓（转起来！） ===== */
         .helicopter {
             position: fixed;
             top: 60px;
@@ -81,7 +77,6 @@
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* ===== 任意门 ===== */
         .door {
             position: fixed;
             bottom: 40px;
@@ -97,7 +92,6 @@
             50% { transform: rotate(-5deg); }
         }
 
-        /* ===== 铜锣烧 ===== */
         .dorayaki {
             position: fixed;
             top: 50%;
@@ -113,7 +107,6 @@
             50% { transform: translateY(-12px) rotate(8deg); }
         }
 
-        /* ===== 铃铛 ===== */
         .bell {
             position: fixed;
             top: 40px;
@@ -130,7 +123,6 @@
             75% { transform: rotate(20deg); }
         }
 
-        /* ===== 小哆啦（右上角） ===== */
         .doraemon-small {
             position: fixed;
             top: 120px;
@@ -149,7 +141,6 @@
             z-index: 1;
         }
 
-        /* ===== 标题 ===== */
         .header {
             background: linear-gradient(135deg, #1a8cff 0%, #2196F3 50%, #1a8cff 100%);
             padding: 26px 24px 20px;
@@ -199,7 +190,6 @@
             text-shadow: 2px 2px 0 #0d6eb8;
         }
 
-        /* ===== 帖子列表 ===== */
         .post-list { display: flex; flex-direction: column; gap: 16px; }
 
         .post-item {
@@ -246,25 +236,25 @@
             transition: color 0.3s ease;
             line-height: 1.5;
         }
-            content: '🤖 ';
-            font-size: 20px;
-        }
         .post-item:hover .title {
             color: #1a8cff;
         }
-            content: '🌟 ';
-        }
 
+        /* ===== 标签样式日期 ===== */
         .post-item .date {
             font-size: 12px;
             font-weight: 600;
-            color: #6a8a9a;
-            background: rgba(26, 140, 255, 0.06);
+            color: #1a8cff;
+            background: rgba(26, 140, 255, 0.08);
             padding: 4px 16px;
             border-radius: 30px;
             white-space: nowrap;
             flex-shrink: 0;
             border: 1px solid rgba(26, 140, 255, 0.08);
+        }
+        .post-item .date::before {
+            content: '📅 ';
+            font-size: 12px;
         }
 
         .post-item .desc {
@@ -279,7 +269,6 @@
             opacity: 0.7;
         }
 
-        /* ===== 底部 ===== */
         .footer {
             margin-top: 48px;
             padding: 16px 0 10px;
@@ -295,7 +284,6 @@
             font-weight: 700;
         }
 
-        /* ===== 移动端 ===== */
         @media (max-width: 640px) {
             body { padding: 16px 10px; }
             .header { padding: 18px 14px 14px; border-radius: 24px; }
@@ -306,8 +294,8 @@
             .post-item { padding: 18px 16px 16px; border-radius: 16px; }
             .post-item .row { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
             .post-item .title { font-size: 15px; }
-            
             .post-item .date { font-size: 10px; padding: 3px 12px; }
+            .post-item .date::before { font-size: 10px; }
             .post-item .desc { font-size: 13px; padding-left: 10px; }
             .post-item::before { font-size: 14px; top: -6px; left: -4px; }
             .cloud { font-size: 30px; }
@@ -320,7 +308,6 @@
             .footer { font-size: 11px; }
         }
 
-        /* ===== 暗色模式 ===== */
         @media (prefers-color-scheme: dark) {
             body { background: #0a1a2a; }
             body::before {
@@ -344,8 +331,8 @@
             .post-item .title { color: #d0e8f0; }
             .post-item:hover .title { color: #4aafff; }
             .post-item .date {
-                color: #6a8a9a;
-                background: rgba(26, 140, 255, 0.04);
+                color: #4aafff;
+                background: rgba(26, 140, 255, 0.06);
                 border-color: rgba(26, 140, 255, 0.06);
             }
             .post-item .desc { color: #6a8a9a; border-left-color: #1a8cff; }
@@ -363,7 +350,6 @@
 </head>
 <body>
 
-    <!-- ===== 哆啦A梦世界装饰 ===== -->
     <div class="cloud">☁️☁️☁️</div>
     <div class="cloud">☁️☁️</div>
     <div class="cloud">☁️</div>
@@ -377,7 +363,7 @@
 
     <div class="container">
         <div class="header">
-            <h1>🔵 hscs · 帖子存档</h1>
+            <h1>来日方长 珍而重之</h1>
             <div class="sub">共 <span id="postCount">0</span> 篇 · 持续更新</div>
         </div>
         <div class="post-list" id="postList"></div>
@@ -396,7 +382,7 @@
                 title: "又咯噔上了姐妹",
                 link: "又咯噔上了姐妹/1.html",
                 date: "2026-08-21",
-                desc: "又咯噔上了姐妹的帖子"
+                desc: "婆子们闹麻了"
             },
             {
                 title: "想跟xxx说",
@@ -419,7 +405,7 @@
                 <a class="post-item" href="${p.link}">
                     <div class="row">
                         <span class="title">${p.title}</span>
-                        <span class="date">${p.date}</span>
+                        <span class="date">最后更新：${p.date}</span>
                     </div>
                     ${p.desc ? `<div class="desc">${p.desc}</div>` : ''}
                 </a>
