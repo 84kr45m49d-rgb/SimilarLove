@@ -466,9 +466,11 @@ body {
 }
 
 .date {
-    flex-shrink: 0;
+    display: inline-block;
 
-    padding: 5px 10px;
+    margin-top: 10px;
+
+    padding: 3px 9px;
 
     border-radius: 20px;
 
@@ -477,7 +479,7 @@ body {
 
     color: #70a0b5;
 
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
 
     white-space: nowrap;
@@ -683,16 +685,8 @@ function render() {
     list.innerHTML = sorted.map(p => `
         <a class="post-item" href="${p.link}">
 
-            <div class="row">
-
-                <span class="title">
-                    ${p.title}
-                </span>
-
-                <span class="date">
-                    最后更新 · ${p.date}
-                </span>
-
+            <div class="title">
+                ${p.title}
             </div>
 
             ${
@@ -700,6 +694,10 @@ function render() {
                 ? `<div class="desc">${p.desc}</div>`
                 : ""
             }
+
+            <div class="date">
+                最后更新 · ${p.date}
+            </div>
 
         </a>
     `).join("");
