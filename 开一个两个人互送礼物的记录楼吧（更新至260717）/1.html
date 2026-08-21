@@ -375,129 +375,230 @@ img[src] {
     text-decoration: underline;
 }
 </style><style>
-html {
-  background: #f4f3ee;
+/* =========================================================
+   Douban Archive — Modern Editorial Style
+   内容保持豆瓣原貌，只重新设计阅读体验
+   ========================================================= */
+
+:root {
+  --bg: #f2f1ed;
+  --paper: #ffffff;
+  --paper-soft: #fafaf8;
+
+  --text: #252b2b;
+  --text-soft: #596262;
+  --text-muted: #929999;
+
+  --green: #16805f;
+  --green-dark: #106b50;
+  --green-soft: #e9f3ee;
+
+  --line: #e9e8e3;
+  --line-dark: #deddd7;
+
+  --quote-bg: #f6f7f4;
+  --quote-line: #b9cdbf;
+
+  --shadow: 0 8px 30px rgba(35, 45, 42, 0.055);
+  --shadow-hover: 0 12px 36px rgba(35, 45, 42, 0.08);
+
+  --radius: 12px;
 }
+
+
+/* =========================================================
+   基础
+   ========================================================= */
+
+html {
+  background: var(--bg);
+}
+
 body {
   box-sizing: border-box;
-  max-width: 1120px;
+  width: 100%;
+  max-width: 1080px;
   min-height: 100vh;
-  margin: 0 auto;
-  padding: 0 42px 64px;
-  color: #1f2a2a;
-  background: #fff;
-  font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+
+  margin: 32px auto;
+  padding: 0 34px 72px;
+
+  color: var(--text);
+  background: var(--paper);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    sans-serif;
+
+  font-size: 16px;
+  line-height: 1.75;
+
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+
+  overflow-wrap: break-word;
 }
+
+/* 返回首页 */
+.archive-home-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  margin: 20px 0 2px;
+
+  color: #71807a;
+
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 500;
+
+  transition:
+    color .18s ease,
+    transform .18s ease;
+}
+
+.archive-home-link:hover {
+  color: #16805f;
+  text-decoration: none;
+  transform: translateX(-2px);
+}
+
 * {
   box-sizing: border-box;
 }
+
 a {
-  color: #00715d;
+  color: var(--green);
+  text-decoration: none;
+  transition: color .18s ease;
+}
+
+a:hover {
+  color: var(--green-dark);
   text-decoration: none;
 }
-a:hover {
-  text-decoration: underline;
-}
+
+
+/* =========================================================
+   图片
+   ========================================================= */
+
 img {
   max-width: min(100%, 720px);
   height: auto;
   cursor: zoom-in;
 }
-p {
-  margin: 0 0 12px;
+
+.topic-richtext img,
+.reply-content img,
+.markdown img,
+.content img:not(.pil) {
+  display: block;
+
+  max-width: min(100%, 720px) !important;
+  height: auto !important;
+
+  margin: 16px 0 20px;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 3px 14px rgba(0, 0, 0, .07);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
 }
+
+.topic-richtext img:hover,
+.reply-content img:hover,
+.markdown img:hover,
+.content img:not(.pil):hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 22px rgba(0, 0, 0, .10);
+}
+
+
+/* =========================================================
+   段落 / 标题
+   ========================================================= */
+
+p {
+  margin: 0 0 13px;
+}
+
 h1 {
   margin: 0;
-  padding: 30px 0 18px;
-  color: #111;
-  font-size: 26px;
-  line-height: 1.35;
-  font-weight: 700;
-  border-bottom: 1px solid #e5e1d9;
+
+  padding: 34px 0 24px;
+
+  color: #171d1d;
+
+  font-size: 29px;
+  line-height: 1.42;
+  font-weight: 750;
+  letter-spacing: -.015em;
+
+  border-bottom: 1px solid var(--line);
 }
+
 h2 {
-  margin: 28px 0 14px;
-  color: #333;
-  font-size: 19px;
+  margin: 32px 0 16px;
+
+  color: #303737;
+
+  font-size: 20px;
+  line-height: 1.45;
+  font-weight: 700;
 }
+
 h3,
 h4 {
-  margin: 0 0 14px;
-  color: #667071;
-  font-size: 15px;
-  line-height: 1.45;
-  font-weight: 600;
+  margin: 0 0 8px;
+
+  color: var(--text-soft);
+
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
 }
+
 h3 .from a,
 h4 > a:first-child,
 .from a {
-  color: #00715d;
-  font-size: 18px;
+  color: var(--green);
+
+  font-size: 17px;
+  line-height: 1.45;
   font-weight: 700;
 }
-.manager-icon,
-.owner-icon {
-  display: inline-block;
-  margin: 0 6px;
-  padding: 0 4px;
-  border-radius: 3px;
-  color: #fff;
-  background: #6f8f63;
-  font-size: 13px;
-  line-height: 1.45;
-}
-.pubtime,
-.topic-meta,
-.create-time,
-.update-time,
-.ip-location {
-  color: #697577;
-  font-size: 14px;
-  font-weight: 600;
-}
-blockquote {
-  margin: 10px 0 16px;
-  padding: 10px 14px;
-  color: #334343;
-  border-left: 3px solid #d7ded4;
-  background: #f4f5f1;
-}
-pre, code {
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-table {
-  max-width: 100%;
-  border-collapse: collapse;
-}
+
+
+/* =========================================================
+   页面主体
+   ========================================================= */
 
 .article {
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
 }
+
 #content,
 .article,
 .mod,
 .mod-bd {
   width: 100% !important;
 }
-#topic-content.topic-content,
-.comment-item {
-  display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  column-gap: 18px;
-  max-width: 100%;
-}
-#topic-content.topic-content {
-  padding: 26px 0 28px;
-  border-bottom: 1px solid #e5e1d9;
-}
-.comment-item {
-  margin: 0;
-  padding: 28px 0 30px;
-  border-bottom: 1px solid #e5e1d9;
-  list-style: none;
-}
+
 .reply-doc,
 .topic-doc,
 .rich-content,
@@ -507,104 +608,319 @@ table {
   min-width: 0;
   max-width: 100%;
 }
-.bg-img-green {
-  background: transparent !important;
+
+
+/* =========================================================
+   楼主 / 帖子正文
+   ========================================================= */
+
+#topic-content.topic-content {
+  display: grid;
+
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 18px;
+
+  width: 100%;
+  max-width: 100%;
+
+  padding: 28px 0 34px;
+
+  border-bottom: 1px solid var(--line);
 }
-.reply-content,
-.topic-richtext {
-  color: #1f2a2a;
+
+.topic-richtext,
+.rich-content {
+  color: var(--text);
+
   font-size: 17px;
+  line-height: 1.82;
 }
+
+.topic-richtext {
+  margin-top: 12px;
+}
+
+
+/* =========================================================
+   回复区
+   ========================================================= */
+
+.comment-item {
+  display: grid;
+
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 18px;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 25px 0 27px;
+
+  border-bottom: 1px solid var(--line);
+
+  list-style: none;
+
+  transition:
+    background .18s ease,
+    border-color .18s ease;
+}
+
+.comment-item:hover {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(22, 128, 95, .018),
+      transparent 75%
+    );
+}
+
+.reply-content,
+.markdown {
+  color: var(--text);
+
+  font-size: 16px;
+  line-height: 1.78;
+}
+
 .reply-content {
-  margin-top: 6px;
+  margin-top: 7px;
   clear: both;
 }
-.markdown {
-  white-space: normal;
-  word-break: break-word;
-}
-.markdown blockquote,
-.reply-quote,
-.ref-comment {
-  margin: 8px 0 16px;
-  padding: 10px 14px;
-  color: #405050;
-  border-left: 3px solid #d7ded4;
-  background: #f4f5f1;
-}
+
+
+/* =========================================================
+   用户头像
+   ========================================================= */
+
 .user-face,
 .avatar {
   flex-shrink: 0;
-  width: 58px;
+  width: 56px;
 }
+
 .user-face a,
 .avatar a {
   display: block;
 }
+
 .user-face img,
 .avatar img,
 img.pil {
   display: block;
-  width: 48px !important;
-  height: 48px !important;
-  max-width: 48px !important;
-  max-height: 48px !important;
+
+  width: 46px !important;
+  height: 46px !important;
+
+  max-width: 46px !important;
+  max-height: 46px !important;
+
   object-fit: cover;
-  border-radius: 6px;
-  background: #e8e5dd;
+
+  border-radius: 50%;
+
+  background: #e8e9e5;
+
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, .045),
+    0 3px 10px rgba(0, 0, 0, .06);
 }
-.topic-richtext img,
-.reply-content img,
-.markdown img,
-.content img:not(.pil) {
-  display: block;
-  max-width: min(100%, 720px) !important;
-  height: auto !important;
-  margin: 12px 0;
-  border-radius: 2px;
+
+
+/* =========================================================
+   用户信息
+   ========================================================= */
+
+.manager-icon,
+.owner-icon {
+  display: inline-block;
+
+  margin-left: 5px;
+  padding: 1px 6px;
+
+  color: var(--green-dark);
+  background: var(--green-soft);
+
+  border-radius: 4px;
+
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 650;
 }
+
+.pubtime,
+.topic-meta,
+.create-time,
+.update-time,
+.ip-location {
+  color: var(--text-muted);
+
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.topic-meta {
+  margin-top: 2px;
+}
+
+
+/* =========================================================
+   引用
+   ========================================================= */
+
+blockquote,
+.markdown blockquote,
+.reply-quote,
+.ref-comment {
+  margin: 15px 0 19px;
+  padding: 13px 16px 13px 18px;
+
+  color: #68716d;
+  background: #f6f7f4;
+
+  border: 1px solid #e7eae5;
+  border-left: 3px solid #b5c9bd;
+  border-radius: 0 8px 8px 0;
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* 引用中的原评论作者 */
+.reply-quote .pubdate,
+.reply-quote-content .pubdate,
+.ref-comment .pubdate,
+.markdown blockquote .pubdate {
+  color: #00715d !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+/* 豆瓣引用内部外壳不再重复画框 */
+.reply-quote-content {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* =========================================================
+   Markdown / 代码
+   ========================================================= */
+
+pre,
+code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+code {
+  padding: 2px 5px;
+
+  color: #40504a;
+  background: #f1f3ef;
+
+  border-radius: 4px;
+
+  font-size: .9em;
+}
+
+pre {
+  padding: 14px 16px;
+
+  background: #f5f6f3;
+
+  border: 1px solid var(--line);
+
+  border-radius: 8px;
+
+  overflow-x: auto;
+}
+
+
+/* =========================================================
+   评论图片
+   ========================================================= */
+
 .comment-photos {
   display: block !important;
+
   clear: both;
+
   width: 100% !important;
-  margin: 10px 0 18px !important;
+
+  margin: 12px 0 20px !important;
   padding: 0 !important;
 }
+
 .cmt-img-wrapper,
 .cmt-img {
   display: block !important;
+
   width: auto !important;
   height: auto !important;
+
   max-width: 100% !important;
+
   overflow: visible !important;
 }
+
 .cmt-img img,
 .comment-photos img {
   display: block !important;
+
   width: auto !important;
   height: auto !important;
+
   max-width: min(100%, 720px) !important;
   max-height: none !important;
-  margin: 12px 0 18px !important;
+
+  margin: 14px 0 20px !important;
+
   object-fit: contain !important;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 3px 14px rgba(0, 0, 0, .07);
 }
+
+
+/* =========================================================
+   投票
+   ========================================================= */
+
 .douban-archive-poll,
 [class*="poll"]:not(.comment-vote),
 [class*="vote"]:not(.comment-vote):not(.lnk-reaction) {
   max-width: 720px;
-  margin: 20px 0;
-  padding: 16px 18px;
-  border: 1px solid #e0ded6;
-  border-left: 4px solid #7a946b;
-  border-radius: 6px;
-  background: #f8f8f4;
+
+  margin: 22px 0;
+
+  padding: 18px 20px;
+
+  background: #f8faf7;
+
+  border: 1px solid #e0e8e1;
+  border-left: 4px solid var(--green);
+
+  border-radius: 9px;
 }
+
 .douban-archive-poll-title {
-  margin: 0 0 10px;
-  color: #5f7656;
-  font-size: 14px;
+  margin: 0 0 13px;
+
+  color: var(--green-dark);
+
+  font-size: 13px;
   font-weight: 700;
+
+  letter-spacing: .02em;
 }
+
 .douban-archive-poll button,
 .douban-archive-poll input[type="radio"],
 .douban-archive-poll input[type="checkbox"],
@@ -613,124 +929,88 @@ img.pil {
 [class*="poll"] input[type="checkbox"] {
   display: none !important;
 }
+
+
+/* =========================================================
+   清理豆瓣原页面杂项
+   ========================================================= */
+
 .clear,
 .clearfix::after {
   display: none;
 }
+
 .single-file-missing-image {
   display: none !important;
 }
-@media (max-width: 720px) {
-  .markdown, .reply-content, .topic-richtext, .ref-content, p, div, span {
-    word-break: break-word !important;
-    white-space: normal !important;
-  }
-  html {
-    background: #fff;
-  }
-  body {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0 16px 42px;
-    overflow-x: hidden;
-  }
-  #topic-content.topic-content,
-  .comment-item {
-    grid-template-columns: 42px minmax(0, 1fr);
-    column-gap: 10px;
-    width: 100%;
-  }
-  .user-face,
-  .avatar {
-    width: 38px;
-  }
-  .user-face img,
-  .avatar img,
-  img.pil {
-    width: 34px !important;
-    height: 34px !important;
-    max-width: 34px !important;
-    max-height: 34px !important;
-  }
-  .comment-item > .reply-doc,
-  #topic-content.topic-content > .topic-doc {
-  }
-  .comment-item .bg-img-green,
-  #topic-content.topic-content .topic-meta,
-  #topic-content.topic-content h3,
-  #topic-content.topic-content h4 {
-    grid-column: 2;
-    min-width: 0;
-  }
-  .comment-item .reply-content,
-  .comment-item .markdown,
-  .comment-item .comment-photos,
-  #topic-content.topic-content .topic-richtext,
-  #topic-content.topic-content .rich-content,
-  #topic-content.topic-content .markdown,
-  #topic-content.topic-content .douban-archive-poll {
-    grid-column: 1 / -1;
-  }
-  .reply-content,
-  .topic-richtext {
-    font-size: 16px;
-    line-height: 1.72;
-  }
-  .markdown blockquote,
-  .reply-quote,
-  .ref-comment,
-  blockquote {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 9px 12px;
-  }
-  .douban-archive-poll,
-  [class*="poll"]:not(.comment-vote),
-  [class*="vote"]:not(.comment-vote):not(.lnk-reaction) {
-    max-width: 100%;
-    margin: 16px 0;
-    padding: 12px 14px;
-  }
-  img,
-  .topic-richtext img,
-  .reply-content img,
-  .markdown img,
-  .content img:not(.pil),
-  .cmt-img img,
-  .comment-photos img {
-    max-width: 100% !important;
-  }
-  h1 {
-    font-size: 21px;
-  }
-  h3 .from a,
-  h4 > a:first-child,
-  .from a {
-    font-size: 16px;
-  }
+
+
+/* =========================================================
+   页面中的特殊内容
+   ========================================================= */
+
+.bg-img-green {
+  background: transparent !important;
 }
+
+table {
+  max-width: 100%;
+
+  border-collapse: collapse;
+}
+
+table td,
+table th {
+  padding: 8px 10px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+
+/* =========================================================
+   Lightbox
+   ========================================================= */
+
 .single-file-lightbox {
   position: fixed;
+
   inset: 0;
+
   z-index: 999999;
+
   display: none;
+
   align-items: center;
   justify-content: center;
+
   padding: 24px;
-  background: rgba(0, 0, 0, 0.82);
+
+  background: rgba(24, 28, 27, .88);
+
+  backdrop-filter: blur(5px);
 }
+
 .single-file-lightbox img {
   max-width: 96vw;
   max-height: 94vh;
+
   cursor: zoom-out;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+
+  border-radius: 6px;
+
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, .35);
 }
+
 .single-file-lightbox.is-open {
   display: flex;
 }
 
-/* Fallback cleanup if a Douban interaction block was not removed structurally. */
+
+/* =========================================================
+   豆瓣交互元素全部隐藏
+   ========================================================= */
+
 #db-global-nav,
 #db-nav-group,
 .global-nav,
@@ -766,8 +1046,174 @@ img.pil {
 #reply_form {
   display: none !important;
 }
+
+
+/* =========================================================
+   手机端
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .archive-home-link {
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+  html {
+    background: #fff;
+  }
+
+  body {
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+
+    padding: 0 16px 42px;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    overflow-x: hidden;
+  }
+
+  .markdown,
+  .reply-content,
+  .topic-richtext,
+  .ref-content,
+  p,
+  div,
+  span {
+    word-break: break-word !important;
+    white-space: normal !important;
+  }
+
+  h1 {
+    padding: 25px 0 19px;
+
+    font-size: 22px;
+    line-height: 1.45;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h3 .from a,
+  h4 > a:first-child,
+  .from a {
+    font-size: 15px;
+  }
+
+  #topic-content.topic-content,
+  .comment-item {
+    grid-template-columns: 38px minmax(0, 1fr);
+
+    column-gap: 10px;
+
+    width: 100%;
+  }
+
+  #topic-content.topic-content {
+    padding: 23px 0 28px;
+  }
+
+  .comment-item {
+    padding: 21px 0 24px;
+  }
+
+  .user-face,
+  .avatar {
+    width: 38px;
+  }
+
+  .user-face img,
+  .avatar img,
+  img.pil {
+    width: 34px !important;
+    height: 34px !important;
+
+    max-width: 34px !important;
+    max-height: 34px !important;
+  }
+
+  .reply-content,
+  .topic-richtext {
+    font-size: 16px;
+    line-height: 1.78;
+  }
+
+  .comment-item .bg-img-green,
+  #topic-content.topic-content .topic-meta,
+  #topic-content.topic-content h3,
+  #topic-content.topic-content h4 {
+    grid-column: 2;
+
+    min-width: 0;
+  }
+
+  .comment-item .reply-content,
+  .comment-item .markdown,
+  .comment-item .comment-photos,
+  #topic-content.topic-content .topic-richtext,
+  #topic-content.topic-content .rich-content,
+  #topic-content.topic-content .markdown,
+  #topic-content.topic-content .douban-archive-poll {
+    grid-column: 1 / -1;
+  }
+
+  .markdown blockquote,
+  .reply-quote,
+  .ref-comment,
+  blockquote {
+    margin-left: 0;
+    margin-right: 0;
+
+    padding: 10px 13px;
+  }
+
+  .douban-archive-poll,
+  [class*="poll"]:not(.comment-vote),
+  [class*="vote"]:not(.comment-vote):not(.lnk-reaction) {
+    max-width: 100%;
+
+    margin: 16px 0;
+
+    padding: 13px 14px;
+  }
+
+  img,
+  .topic-richtext img,
+  .reply-content img,
+  .markdown img,
+  .content img:not(.pil),
+  .cmt-img img,
+  .comment-photos img {
+    max-width: 100% !important;
+  }
+
+  .topic-richtext img,
+  .reply-content img,
+  .markdown img,
+  .content img:not(.pil),
+  .cmt-img img,
+  .comment-photos img {
+    margin-top: 12px;
+    margin-bottom: 17px;
+
+    border-radius: 7px;
+  }
+
+  .pubtime,
+  .topic-meta,
+  .create-time,
+  .update-time,
+  .ip-location {
+    font-size: 11px;
+  }
+}
 </style></head>
-<body>
+<body><a class="archive-home-link" href="../index.html">← 返回首页</a>
 
 
 
@@ -850,7 +1296,7 @@ img.pil {
 </div>
 </li>
 </ul>
-<ul class="topic-reply" id="comments">
+<h3 class="popular-hd all-comments-hd">全部回复</h3><ul class="topic-reply" id="comments">
 <li class="clearfix comment-item reply-item" data-author-id="84669203" data-cid="6553671707" data-is_folded="False" data-target_kind="1013" id="6553671707">
 <div class="user-face">
 <img alt="momo" class="pil" src="data:image/jpeg;base64,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"/>
