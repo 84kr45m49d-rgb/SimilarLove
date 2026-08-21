@@ -1,425 +1,716 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔵 帖子存档 · 哆啦A梦</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-            background: #f0f8ff;
-            min-height: 100vh;
-            padding: 30px 16px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            position: relative;
-            overflow-x: hidden;
-        }
+<title>来日方长 · 珍而重之</title>
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #f0f8ff 100%);
-            z-index: -2;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .cloud {
-            position: fixed;
-            font-size: 55px;
-            opacity: 0.35;
-            pointer-events: none;
-            z-index: 0;
-            animation: cloudFloat 25s ease-in-out infinite alternate;
-        }
-        .cloud:nth-child(1) { top: 30px; left: -40px; animation-duration: 30s; }
-        .cloud:nth-child(2) { top: 90px; right: -30px; animation-duration: 35s; animation-direction: reverse; }
-        .cloud:nth-child(3) { top: 160px; left: 20%; animation-duration: 28s; opacity: 0.2; }
-        @keyframes cloudFloat {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(80px); }
-        }
+:root {
+    --blue: #168bd1;
+    --blue-dark: #0874b8;
+    --blue-light: #63c4ed;
+    --sky: #dff4ff;
+    --cream: #fffdf5;
+    --yellow: #ffd84d;
+    --red: #e84d4d;
+    --ink: #27465b;
+    --muted: #7893a4;
+    --line: #d9edf7;
+}
 
-        .doraemon-big {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 90px;
-            z-index: 0;
-            opacity: 0.12;
-            pointer-events: none;
-            animation: doraemonFloat 4s ease-in-out infinite;
-        }
-        @keyframes doraemonFloat {
-            0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
-            50% { transform: translateX(-50%) translateY(-15px) rotate(-3deg); }
-        }
+html {
+    min-height: 100%;
+}
 
-        .helicopter {
-            position: fixed;
-            top: 60px;
-            left: 20px;
-            font-size: 45px;
-            z-index: 0;
-            opacity: 0.2;
-            pointer-events: none;
-            animation: spin 3s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg) scale(1); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
+body {
+    min-height: 100vh;
+    font-family:
+        "PingFang SC",
+        "Microsoft YaHei",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
 
-        .door {
-            position: fixed;
-            bottom: 40px;
-            right: 20px;
-            font-size: 70px;
-            z-index: 0;
-            opacity: 0.15;
-            pointer-events: none;
-            animation: doorShake 5s ease-in-out infinite;
-        }
-        @keyframes doorShake {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(-5deg); }
-        }
+    color: var(--ink);
 
-        .dorayaki {
-            position: fixed;
-            top: 50%;
-            right: 10px;
-            font-size: 35px;
-            z-index: 0;
-            opacity: 0.1;
-            pointer-events: none;
-            animation: dorayakiBounce 3s ease-in-out infinite;
-        }
-        @keyframes dorayakiBounce {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(8deg); }
-        }
+    background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.95) 0 55px, transparent 56px),
+        radial-gradient(circle at 85% 18%, rgba(255,255,255,.8) 0 75px, transparent 76px),
+        linear-gradient(
+            180deg,
+            #8fd8f5 0%,
+            #c7edfb 34%,
+            #eaf8fc 68%,
+            #fffdf7 100%
+        );
 
-        .bell {
-            position: fixed;
-            top: 40px;
-            right: 30px;
-            font-size: 35px;
-            z-index: 0;
-            opacity: 0.15;
-            pointer-events: none;
-            animation: bellRing 2s ease-in-out infinite;
-        }
-        @keyframes bellRing {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-20deg); }
-            75% { transform: rotate(20deg); }
-        }
+    overflow-x: hidden;
+}
 
-        .doraemon-small {
-            position: fixed;
-            top: 120px;
-            right: 10px;
-            font-size: 30px;
-            z-index: 0;
-            opacity: 0.08;
-            pointer-events: none;
-            animation: doraemonFloat 3s ease-in-out infinite;
-        }
+/* =========================================================
+   背景云朵
+   ========================================================= */
 
-        .container {
-            max-width: 860px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-        }
+.cloud {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    opacity: .48;
+    filter: blur(.2px);
+}
 
-        .header {
-            background: linear-gradient(135deg, #1a8cff 0%, #2196F3 50%, #1a8cff 100%);
-            padding: 26px 24px 20px;
-            border-radius: 30px 30px 30px 4px;
-            box-shadow: 0 8px 30px rgba(26, 140, 255, 0.2), inset 0 -4px 0 #0d6eb8;
-            margin-bottom: 34px;
-            text-align: center;
-            position: relative;
-            border: 3px solid #ffffff;
-        }
-        .header::before {
-            content: '🔔';
-            position: absolute;
-            top: -18px;
-            left: 20px;
-            font-size: 30px;
-            animation: bellRing 2s ease-in-out infinite;
-        }
-        .header::after {
-            content: '🔔';
-            position: absolute;
-            top: -18px;
-            right: 20px;
-            font-size: 30px;
-            animation: bellRing 2s ease-in-out infinite reverse;
-        }
+.cloud::before,
+.cloud::after {
+    content: "";
+    position: absolute;
+    background: rgba(255,255,255,.92);
+    border-radius: 999px;
+}
 
-        .header h1 {
-            font-size: 28px;
-            font-weight: 800;
-            color: #ffffff;
-            text-shadow: 3px 3px 0 #0d6eb8, 0 0 30px rgba(255,255,255,0.1);
-            letter-spacing: 2px;
-            line-height: 1.4;
-        }
-        .header .sub {
-            font-size: 14px;
-            color: rgba(255,255,255,0.85);
-            margin-top: 6px;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-        .header .sub span {
-            font-weight: 800;
-            font-size: 18px;
-            color: #FFD700;
-            text-shadow: 2px 2px 0 #0d6eb8;
-        }
+.cloud.one {
+    width: 180px;
+    height: 48px;
+    top: 95px;
+    left: -40px;
+}
 
-        .post-list { display: flex; flex-direction: column; gap: 16px; }
+.cloud.one::before {
+    width: 75px;
+    height: 75px;
+    left: 35px;
+    bottom: 0;
+}
 
-        .post-item {
-            display: block;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            padding: 24px 26px 20px;
-            border-radius: 20px 20px 20px 4px;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 4px 20px rgba(26, 140, 255, 0.06), inset 0 1px 0 rgba(255,255,255,0.8);
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-        }
-        .post-item::before {
-            content: '🔵';
-            position: absolute;
-            top: -10px;
-            left: -6px;
-            font-size: 20px;
-            opacity: 0.2;
-        }
+.cloud.one::after {
+    width: 100px;
+    height: 90px;
+    left: 80px;
+    bottom: 0;
+}
 
-        .post-item:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 12px 40px rgba(26, 140, 255, 0.12), 0 0 40px rgba(26, 140, 255, 0.04);
-            background: rgba(255, 255, 255, 0.95);
-        }
+.cloud.two {
+    width: 220px;
+    height: 55px;
+    top: 210px;
+    right: -80px;
+    opacity: .3;
+}
 
-        .post-item .row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-        .post-item .title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1a2a3a;
-            transition: color 0.3s ease;
-            line-height: 1.5;
-        }
-        .post-item:hover .title {
-            color: #1a8cff;
-        }
+.cloud.two::before {
+    width: 85px;
+    height: 85px;
+    left: 40px;
+    bottom: 0;
+}
 
-        /* ===== 标签样式日期 ===== */
-        .post-item .date {
-            font-size: 12px;
-            font-weight: 600;
-            color: #1a8cff;
-            background: rgba(26, 140, 255, 0.08);
-            padding: 4px 16px;
-            border-radius: 30px;
-            white-space: nowrap;
-            flex-shrink: 0;
-            border: 1px solid rgba(26, 140, 255, 0.08);
-        }
-        .post-item .date::before {
-            content: '📅 ';
-            font-size: 12px;
-        }
+.cloud.two::after {
+    width: 110px;
+    height: 100px;
+    left: 100px;
+    bottom: 0;
+}
 
-        .post-item .desc {
-            font-size: 14px;
-            color: #5a7a8a;
-            margin-top: 4px;
-            line-height: 1.7;
-            padding-left: 4px;
-            font-weight: 400;
-            border-left: 3px solid #1a8cff;
-            padding-left: 14px;
-            opacity: 0.7;
-        }
+/* =========================================================
+   漂浮星星
+   ========================================================= */
 
-        .footer {
-            margin-top: 48px;
-            padding: 16px 0 10px;
-            border-top: 3px dashed rgba(26, 140, 255, 0.15);
-            font-size: 13px;
-            color: #8ab0c0;
-            text-align: center;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-        .footer span {
-            color: #1a8cff;
-            font-weight: 700;
-        }
+.star {
+    position: fixed;
+    color: rgba(255,255,255,.75);
+    pointer-events: none;
+    z-index: 0;
+    animation: twinkle 3s ease-in-out infinite;
+}
 
-        @media (max-width: 640px) {
-            body { padding: 16px 10px; }
-            .header { padding: 18px 14px 14px; border-radius: 24px; }
-            .header h1 { font-size: 20px; }
-            .header .sub { font-size: 12px; }
-            .header .sub span { font-size: 15px; }
-            .header::before, .header::after { font-size: 22px; top: -14px; left: 10px; right: 10px; }
-            .post-item { padding: 18px 16px 16px; border-radius: 16px; }
-            .post-item .row { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
-            .post-item .title { font-size: 15px; }
-            .post-item .date { font-size: 10px; padding: 3px 12px; }
-            .post-item .date::before { font-size: 10px; }
-            .post-item .desc { font-size: 13px; padding-left: 10px; }
-            .post-item::before { font-size: 14px; top: -6px; left: -4px; }
-            .cloud { font-size: 30px; }
-            .doraemon-big { font-size: 60px; bottom: 10px; opacity: 0.08; }
-            .helicopter { font-size: 30px; top: 30px; left: 10px; opacity: 0.15; }
-            .door { font-size: 45px; bottom: 20px; right: 10px; opacity: 0.1; }
-            .dorayaki { font-size: 25px; top: 40%; right: 5px; opacity: 0.08; }
-            .bell { font-size: 25px; top: 25px; right: 15px; opacity: 0.1; }
-            .doraemon-small { font-size: 20px; top: 80px; right: 5px; opacity: 0.06; }
-            .footer { font-size: 11px; }
-        }
+.star.s1 {
+    top: 120px;
+    right: 17%;
+    font-size: 18px;
+}
 
-        @media (prefers-color-scheme: dark) {
-            body { background: #0a1a2a; }
-            body::before {
-                background: linear-gradient(180deg, #0a2a4a 0%, #0a1a2a 60%, #060e16 100%);
-            }
-            .header {
-                background: linear-gradient(135deg, #0d6eb8 0%, #1a8cff 50%, #0d6eb8 100%);
-                box-shadow: 0 8px 30px rgba(26, 140, 255, 0.08);
-            }
-            .header h1 { color: #ffffff; text-shadow: 3px 3px 0 #0a4a7a; }
-            .header .sub { color: rgba(255,255,255,0.7); }
-            .post-item {
-                background: rgba(10, 30, 50, 0.7);
-                backdrop-filter: blur(8px);
-                border-color: rgba(26, 140, 255, 0.1);
-            }
-            .post-item:hover {
-                background: rgba(10, 30, 50, 0.9);
-                box-shadow: 0 12px 40px rgba(26, 140, 255, 0.06);
-            }
-            .post-item .title { color: #d0e8f0; }
-            .post-item:hover .title { color: #4aafff; }
-            .post-item .date {
-                color: #4aafff;
-                background: rgba(26, 140, 255, 0.06);
-                border-color: rgba(26, 140, 255, 0.06);
-            }
-            .post-item .desc { color: #6a8a9a; border-left-color: #1a8cff; }
-            .footer { border-top-color: rgba(26, 140, 255, 0.06); color: #3a5a6a; }
-            .footer span { color: #1a8cff; }
-            .cloud { opacity: 0.12; }
-            .doraemon-big { opacity: 0.05; }
-            .helicopter { opacity: 0.08; }
-            .door { opacity: 0.06; }
-            .dorayaki { opacity: 0.05; }
-            .bell { opacity: 0.06; }
-            .doraemon-small { opacity: 0.04; }
-        }
-    </style>
+.star.s2 {
+    top: 340px;
+    left: 7%;
+    font-size: 13px;
+    animation-delay: 1s;
+}
+
+.star.s3 {
+    top: 480px;
+    right: 8%;
+    font-size: 15px;
+    animation-delay: 1.8s;
+}
+
+@keyframes twinkle {
+    0%,100% {
+        opacity: .25;
+        transform: scale(.85);
+    }
+
+    50% {
+        opacity: .9;
+        transform: scale(1.15);
+    }
+}
+
+/* =========================================================
+   主容器
+   ========================================================= */
+
+.container {
+    width: min(900px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 58px 0 45px;
+    position: relative;
+    z-index: 2;
+}
+
+/* =========================================================
+   顶部
+   ========================================================= */
+
+.header {
+    position: relative;
+    background: linear-gradient(
+        145deg,
+        #1596dc 0%,
+        #168bd1 55%,
+        #0874b8 100%
+    );
+
+    border-radius: 34px;
+    padding: 34px 30px 31px;
+
+    box-shadow:
+        0 18px 45px rgba(23,120,170,.22),
+        inset 0 2px 0 rgba(255,255,255,.25),
+        inset 0 -5px 0 rgba(4,92,145,.3);
+
+    border: 3px solid rgba(255,255,255,.92);
+
+    overflow: hidden;
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    right: -90px;
+    top: -130px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.1);
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: -80px;
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.08);
+}
+
+/* 铃铛 */
+
+.bell {
+    position: absolute;
+    left: 28px;
+    top: 25px;
+
+    width: 32px;
+    height: 32px;
+
+    background: var(--yellow);
+    border-radius: 50% 50% 45% 45%;
+
+    border: 3px solid #f1bd21;
+
+    box-shadow:
+        inset 0 -5px 0 rgba(190,135,0,.18),
+        0 3px 7px rgba(0,0,0,.12);
+
+    z-index: 3;
+}
+
+.bell::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    left: 10px;
+    bottom: 4px;
+
+    background: #bd8a0c;
+    border-radius: 50%;
+}
+
+.bell::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 4px;
+    left: 3px;
+    bottom: 8px;
+
+    background: #e8b51c;
+    border-radius: 5px;
+}
+
+/*  */
+
+.pocket {
+    position: absolute;
+    right: 29px;
+    bottom: -30px;
+
+    width: 120px;
+    height: 82px;
+
+    border-radius: 65px 65px 0 0;
+
+    background: #eaf9ff;
+    border: 5px solid #d7f1fb;
+
+    opacity: .22;
+}
+
+.header-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+}
+
+.header h1 {
+    color: white;
+
+    font-size: clamp(25px, 5vw, 34px);
+    line-height: 1.35;
+
+    font-weight: 800;
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 3px 0 rgba(5,92,145,.55),
+        0 7px 18px rgba(0,0,0,.08);
+}
+
+.header-sub {
+    margin-top: 10px;
+
+    color: rgba(255,255,255,.88);
+
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.header-sub strong {
+    color: var(--yellow);
+    font-size: 21px;
+
+    text-shadow:
+        0 2px 0 rgba(0,0,0,.16);
+}
+
+/* =========================================================
+   小标题
+   ========================================================= */
+
+.archive-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 34px 4px 15px;
+
+    color: #5b8296;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.archive-label::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+
+    background: var(--yellow);
+    border-radius: 50%;
+
+    border: 2px solid #e8bb24;
+
+    box-shadow: 0 0 0 4px rgba(255,216,77,.18);
+}
+
+.archive-label::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+
+    background: linear-gradient(
+        90deg,
+        #c8e8f4,
+        transparent
+    );
+}
+
+/* =========================================================
+   帖子列表
+   ========================================================= */
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.post-item {
+    position: relative;
+
+    display: block;
+
+    padding: 22px 24px 20px 27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.97),
+            rgba(255,253,247,.95)
+        );
+
+    border: 1px solid rgba(174,216,234,.75);
+    border-radius: 18px;
+
+    text-decoration: none;
+    color: inherit;
+
+    box-shadow:
+        0 5px 20px rgba(43,128,164,.07),
+        0 1px 0 rgba(255,255,255,.9) inset;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+.post-item::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 18px;
+    bottom: 18px;
+
+    width: 4px;
+
+    border-radius: 0 4px 4px 0;
+
+    background: linear-gradient(
+        180deg,
+        var(--blue-light),
+        var(--blue)
+    );
+}
+
+.post-item:hover {
+    transform: translateY(-3px);
+
+    border-color: #8bd1ee;
+
+    box-shadow:
+        0 12px 32px rgba(43,128,164,.13),
+        0 0 0 4px rgba(79,190,230,.06);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 18px;
+}
+
+.title {
+    color: #294b60;
+
+    font-size: 17px;
+    font-weight: 750;
+
+    line-height: 1.55;
+
+    transition: color .2s ease;
+}
+
+.post-item:hover .title {
+    color: var(--blue-dark);
+}
+
+.date {
+    flex-shrink: 0;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: #eef9fd;
+    border: 1px solid #d6eef7;
+
+    color: #70a0b5;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.desc {
+    margin-top: 9px;
+
+    padding-left: 2px;
+
+    color: #86a0ad;
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+/* =========================================================
+   底部
+   ========================================================= */
+
+.footer {
+    margin-top: 38px;
+
+    text-align: center;
+
+    color: #8ca8b5;
+
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.footer::before {
+    content: "✦";
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #f2c62e;
+    font-size: 14px;
+}
+
+/* =========================================================
+   手机端
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .container {
+        width: calc(100% - 20px);
+        padding-top: 25px;
+    }
+
+    .header {
+        padding: 27px 18px 25px;
+        border-radius: 25px;
+    }
+
+    .header h1 {
+        font-size: 23px;
+        letter-spacing: 2px;
+    }
+
+    .header-sub {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .bell {
+        left: 17px;
+        top: 18px;
+        transform: scale(.8);
+    }
+
+    .pocket {
+        right: -15px;
+    }
+
+    .archive-label {
+        margin-top: 27px;
+    }
+
+    .post-item {
+        padding: 19px 17px 17px 21px;
+        border-radius: 15px;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .title {
+        font-size: 15px;
+        line-height: 1.55;
+    }
+
+    .date {
+        font-size: 10px;
+    }
+
+    .desc {
+        font-size: 12px;
+    }
+}
+
+</style>
 </head>
+
 <body>
 
-    <div class="cloud">☁️☁️☁️</div>
-    <div class="cloud">☁️☁️</div>
-    <div class="cloud">☁️</div>
+<div class="cloud one"></div>
+<div class="cloud two"></div>
 
-    <div class="doraemon-big">🐱</div>
-    <div class="helicopter">🚁</div>
-    <div class="door">🚪</div>
-    <div class="dorayaki">🍩</div>
-    <div class="bell">🔔</div>
-    <div class="doraemon-small">🐱</div>
+<div class="star s1">✦</div>
+<div class="star s2">✦</div>
+<div class="star s3">✦</div>
 
-    <div class="container">
-        <div class="header">
-            <h1>来日方长 珍而重之</h1>
-            <div class="sub">共 <span id="postCount">0</span> 篇 · 持续更新</div>
+<div class="container">
+
+    <header class="header">
+
+        <div class="bell"></div>
+        <div class="pocket"></div>
+
+        <div class="header-content">
+
+            <h1>来日方长 · 珍而重之</h1>
+
+            <div class="header-sub">
+                共
+                <strong id="postCount">0</strong>
+                篇 · 持续更新
+            </div>
+
         </div>
-        <div class="post-list" id="postList"></div>
-        <div class="footer"><span>◆</span> 仅供个人存档 · 不定期更新 <span>◆</span></div>
+
+    </header>
+
+    <div class="archive-label">
+        MEMORY ARCHIVE
     </div>
 
-    <script>
-        const postsData = [
+    <main class="post-list" id="postList"></main>
+
+    <footer class="footer">
+        仅供个人存档 · 不定期更新
+    </footer>
+
+</div>
+
+<script>
+
+const postsData = [
+{
+                title: "我只想说明真相，也不带任何rrgj。该给的体面已经给了。不明真相的请看此楼。",
+                link: "我只想说明真相，也不带任何rrgj。该给的体面已经给了。不明真相的请看此楼。/1.html",
+                date: "2026-08-08 16:27:52",
+                desc: "已备份😎，休想春秋笔法"
+            },
             {
                 title: "开一个两个人互送礼物的记录楼吧（更新至260717）",
                 link: "开一个两个人互送礼物的记录楼吧（更新至260717）/1.html",
-                date: "2026-08-21",
-                desc: "持续更新的礼物记录帖"
-            },            
-            {
-                title: "婆婆子cyberpunk",
-                link: "婆婆子cyberpunk/1.html",
-                date: "2026-08-21",
-                desc: "胡言乱语发疯中"
+                date: "2026-08-02 22:28:13",
+                desc: "已备份😎，休想春秋笔法"
             },
-            {
+    {
+        title: "婆婆子cyberpunk",
+        link: "婆婆子cyberpunk/1.html",
+        date: "9999-99-99 99:99:99",
+        desc: "胡言乱语发疯中"
+    },
+                                        {
                 title: "又咯噔上了姐妹",
                 link: "又咯噔上了姐妹/1.html",
-                date: "2026-08-21",
-                desc: "婆子们闹麻了"
+                date: "2026-08-21 21:58:03",
+                desc: "已备份😎，休想春秋笔法"
             },
-            {
+                {
                 title: "想跟xxx说",
                 link: "想跟xxx说/1.html",
-                date: "2026-08-19",
-                desc: "一段关于告别与成长的故事"
+                date: "2026-08-21 07:58:24",
+                desc: "已备份😎，休想春秋笔法"
             },
-            {
-                title: "时间线",
-                link: "时间线原版/时间线.html",
-                date: "2026-08-03",
-                desc: "被下架后恢复的5页长帖，共443条评论"
-            }
+    {
+        title: "时间线",
+        link: "时间线原版/时间线.html",
+        date: "2026-08-03 14:00:44",
+        desc: "被下架后恢复的5页长帖，共443条评论"
+    }
         ];
 
-        function render() {
-            const list = document.getElementById('postList');
-            const sorted = [...postsData].sort((a, b) => new Date(b.date) - new Date(a.date));
-            list.innerHTML = sorted.map(p => `
-                <a class="post-item" href="${p.link}">
-                    <div class="row">
-                        <span class="title">${p.title}</span>
-                        <span class="date">最后更新：${p.date}</span>
-                    </div>
-                    ${p.desc ? `<div class="desc">${p.desc}</div>` : ''}
-                </a>
-            `).join('');
-            document.getElementById('postCount').textContent = postsData.length;
-        }
+function render() {
 
-        render();
-    </script>
+    const list = document.getElementById("postList");
+
+    const sorted = [...postsData].sort(
+        (a, b) =>
+            new Date(b.date) -
+            new Date(a.date)
+    );
+
+    list.innerHTML = sorted.map(p => `
+        <a class="post-item" href="${p.link}">
+
+            <div class="row">
+
+                <span class="title">
+                    ${p.title}
+                </span>
+
+                <span class="date">
+                    最后更新 · ${p.date}
+                </span>
+
+            </div>
+
+            ${
+                p.desc
+                ? `<div class="desc">${p.desc}</div>`
+                : ""
+            }
+
+        </a>
+    `).join("");
+
+    document.getElementById("postCount").textContent =
+        postsData.length;
+}
+
+render();
+
+</script>
+
 </body>
 </html>

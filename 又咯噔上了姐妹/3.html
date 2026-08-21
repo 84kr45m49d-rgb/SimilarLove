@@ -53,7 +53,348 @@
 
 
 
-<style data-qihu-pc-style="1">
+<style data-qihu-pc-banner-style="1">
+    .adjs-qihupc-banner-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .adjs-qihupc-banner-banner {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--adjs-pc-banner-radius, 4px);
+      background: #f3f4f6;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+      transition: box-shadow 120ms ease, transform 120ms ease;
+    }
+    .adjs-qihupc-banner-banner.is-hoverable:hover {
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+      transform: translateY(-1px);
+    }
+    .adjs-qihupc-banner-media-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: var(--adjs-pc-banner-ratio, 26 / 2.5);
+      background: var(--adjs-pc-banner-bg, #f8fafc);
+      overflow: hidden;
+    }
+    .adjs-qihupc-banner-media-backdrop,
+    .adjs-qihupc-banner-media-focus {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .adjs-qihupc-banner-media-focus {
+      z-index: 1;
+    }
+    .adjs-qihupc-banner-media,
+    .adjs-qihupc-banner-video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: center center;
+      background: transparent;
+    }
+    .adjs-qihupc-banner-video {
+      object-fit: contain;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive {
+      background: var(--adjs-pc-banner-adaptive-bg, #111827);
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-media-wrap {
+      background: var(--adjs-pc-banner-adaptive-bg, #111827);
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-media-backdrop::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(15, 23, 42, 0.66) 0%, rgba(15, 23, 42, 0.4) 28%, rgba(15, 23, 42, 0.16) 46%, rgba(15, 23, 42, 0.06) 68%, rgba(15, 23, 42, 0.02) 100%),
+        radial-gradient(circle at 16% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 42%);
+      pointer-events: none;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-media-backdrop .adjs-qihupc-banner-media,
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-media-backdrop .adjs-qihupc-banner-video {
+      object-fit: cover;
+      object-position: center center;
+      transform: scale(1.22);
+      filter: blur(22px) brightness(0.66) saturate(1.02);
+      opacity: 0.94;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-media-focus {
+      left: var(--adjs-pc-banner-focus-left, 31%);
+      width: var(--adjs-pc-banner-focus-width, 46%);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      box-sizing: border-box;
+      overflow: visible;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-media-focus .adjs-qihupc-banner-media {
+      width: auto;
+      min-width: 0;
+      max-width: none;
+      height: 100%;
+      flex: 0 0 auto;
+      object-fit: contain;
+      object-position: var(--adjs-pc-banner-focus-x, 50%) var(--adjs-pc-banner-focus-y, 50%);
+      filter: none;
+      transform: none;
+      opacity: 1;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-media-focus .adjs-qihupc-banner-video {
+      object-fit: contain;
+      object-position: var(--adjs-pc-banner-focus-x, 50%) var(--adjs-pc-banner-focus-y, 50%);
+      filter: none;
+      transform: none;
+      opacity: 1;
+    }
+    .adjs-qihupc-banner-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.30) 0%, rgba(15, 23, 42, 0.10) 45%, rgba(15, 23, 42, 0.06) 100%);
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-overlay {
+      z-index: 2;
+      background: none;
+      gap: 12px;
+      padding: 14px 16px;
+      align-items: flex-end;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: var(--adjs-pc-banner-text-panel-width, min(34%, 340px));
+      background: linear-gradient(90deg, rgba(17, 24, 39, 0.34) 0%, rgba(17, 24, 39, 0.2) 72%, rgba(17, 24, 39, 0) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      pointer-events: none;
+    }
+    .adjs-qihupc-banner-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+      max-width: 68%;
+      color: #fff;
+      text-align: left;
+      text-shadow: 0 1px 2px rgba(15, 23, 42, 0.22);
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-text {
+      position: relative;
+      z-index: 1;
+      width: var(--adjs-pc-banner-text-width, min(31%, 312px));
+      max-width: var(--adjs-pc-banner-text-width, min(31%, 312px));
+      min-width: 220px;
+      padding: 4px 0 6px;
+      text-shadow: 0 2px 8px rgba(15, 23, 42, 0.36);
+    }
+    .adjs-qihupc-banner-title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-title {
+      font-size: 18px;
+      line-height: 1.28;
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .adjs-qihupc-banner-desc {
+      margin-top: 4px;
+      font-size: 12px;
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      opacity: 0.92;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-desc {
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.4;
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      opacity: 0.8;
+    }
+    .adjs-qihupc-banner-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1;
+      opacity: 0.95;
+    }
+    .adjs-qihupc-banner-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 18px;
+      padding: 0 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      font-size: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-badge {
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      z-index: 3;
+      height: 17px;
+      padding: 0 6px;
+      font-size: 10px;
+      background: rgba(17, 24, 39, 0.36);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .adjs-qihupc-banner-action {
+      flex: 0 0 auto;
+      align-self: center;
+      min-width: 108px;
+      max-width: 180px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: var(--adjs-pc-banner-cta-color, #2f6f4f);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 38px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(47, 111, 79, 0.28);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-action {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      min-width: 0;
+      margin-top: 0;
+      margin-left: 6px;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.2;
+      border: 0;
+      box-shadow: none;
+    }
+    .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-meta {
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 11px;
+      line-height: 1.15;
+      opacity: 0.92;
+      flex-wrap: wrap;
+    }
+    .adjs-qihupc-banner-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 2;
+      width: 22px;
+      height: 22px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
+    }
+    .adjs-qihupc-banner-restore {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #f8fafc;
+      color: #57606a;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .adjs-qihupc-banner-restore-button {
+      border: 0;
+      border-radius: 999px;
+      background: #fff;
+      color: #0969da;
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: inset 0 0 0 1px #d0d7de;
+    }
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-overlay {
+      padding: 8px 10px;
+      gap: 8px;
+    }
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-text {
+      max-width: 62%;
+    }
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-title {
+      font-size: 14px;
+    }
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-desc,
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-meta {
+      display: none;
+    }
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-action {
+      min-width: 84px;
+      padding: 0 12px;
+      font-size: 12px;
+      line-height: 32px;
+    }
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-media-focus {
+      left: var(--adjs-pc-banner-focus-left-compact, 12%);
+      width: var(--adjs-pc-banner-focus-width-compact, 88%);
+      padding: 3px 6px;
+    }
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-media-backdrop::after {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.18) 0%, rgba(15, 23, 42, 0.52) 58%, rgba(15, 23, 42, 0.82) 100%);
+    }
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-overlay {
+      align-items: flex-end;
+    }
+    .adjs-qihupc-banner-list.is-compact .adjs-qihupc-banner-banner.is-adaptive .adjs-qihupc-banner-text {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      padding: 0;
+    }
+  </style><style data-qihu-pc-style="1">
     .adjs-qihupc-list {
       display: grid;
       gap: 12px;
@@ -375,129 +716,230 @@ img[src] {
     text-decoration: underline;
 }
 </style><style>
-html {
-  background: #f4f3ee;
+/* =========================================================
+   Douban Archive — Modern Editorial Style
+   内容保持豆瓣原貌，只重新设计阅读体验
+   ========================================================= */
+
+:root {
+  --bg: #f2f1ed;
+  --paper: #ffffff;
+  --paper-soft: #fafaf8;
+
+  --text: #252b2b;
+  --text-soft: #596262;
+  --text-muted: #929999;
+
+  --green: #16805f;
+  --green-dark: #106b50;
+  --green-soft: #e9f3ee;
+
+  --line: #e9e8e3;
+  --line-dark: #deddd7;
+
+  --quote-bg: #f6f7f4;
+  --quote-line: #b9cdbf;
+
+  --shadow: 0 8px 30px rgba(35, 45, 42, 0.055);
+  --shadow-hover: 0 12px 36px rgba(35, 45, 42, 0.08);
+
+  --radius: 12px;
 }
+
+
+/* =========================================================
+   基础
+   ========================================================= */
+
+html {
+  background: var(--bg);
+}
+
 body {
   box-sizing: border-box;
-  max-width: 1120px;
+  width: 100%;
+  max-width: 1080px;
   min-height: 100vh;
-  margin: 0 auto;
-  padding: 0 42px 64px;
-  color: #1f2a2a;
-  background: #fff;
-  font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+
+  margin: 32px auto;
+  padding: 0 34px 72px;
+
+  color: var(--text);
+  background: var(--paper);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    sans-serif;
+
+  font-size: 16px;
+  line-height: 1.75;
+
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+
+  overflow-wrap: break-word;
 }
+
+/* 返回首页 */
+.archive-home-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  margin: 20px 0 2px;
+
+  color: #71807a;
+
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 500;
+
+  transition:
+    color .18s ease,
+    transform .18s ease;
+}
+
+.archive-home-link:hover {
+  color: #16805f;
+  text-decoration: none;
+  transform: translateX(-2px);
+}
+
 * {
   box-sizing: border-box;
 }
+
 a {
-  color: #00715d;
+  color: var(--green);
+  text-decoration: none;
+  transition: color .18s ease;
+}
+
+a:hover {
+  color: var(--green-dark);
   text-decoration: none;
 }
-a:hover {
-  text-decoration: underline;
-}
+
+
+/* =========================================================
+   图片
+   ========================================================= */
+
 img {
   max-width: min(100%, 720px);
   height: auto;
   cursor: zoom-in;
 }
-p {
-  margin: 0 0 12px;
+
+.topic-richtext img,
+.reply-content img,
+.markdown img,
+.content img:not(.pil) {
+  display: block;
+
+  max-width: min(100%, 720px) !important;
+  height: auto !important;
+
+  margin: 16px 0 20px;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 3px 14px rgba(0, 0, 0, .07);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
 }
+
+.topic-richtext img:hover,
+.reply-content img:hover,
+.markdown img:hover,
+.content img:not(.pil):hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 22px rgba(0, 0, 0, .10);
+}
+
+
+/* =========================================================
+   段落 / 标题
+   ========================================================= */
+
+p {
+  margin: 0 0 13px;
+}
+
 h1 {
   margin: 0;
-  padding: 30px 0 18px;
-  color: #111;
-  font-size: 26px;
-  line-height: 1.35;
-  font-weight: 700;
-  border-bottom: 1px solid #e5e1d9;
+
+  padding: 34px 0 24px;
+
+  color: #171d1d;
+
+  font-size: 29px;
+  line-height: 1.42;
+  font-weight: 750;
+  letter-spacing: -.015em;
+
+  border-bottom: 1px solid var(--line);
 }
+
 h2 {
-  margin: 28px 0 14px;
-  color: #333;
-  font-size: 19px;
+  margin: 32px 0 16px;
+
+  color: #303737;
+
+  font-size: 20px;
+  line-height: 1.45;
+  font-weight: 700;
 }
+
 h3,
 h4 {
-  margin: 0 0 14px;
-  color: #667071;
-  font-size: 15px;
-  line-height: 1.45;
-  font-weight: 600;
+  margin: 0 0 8px;
+
+  color: var(--text-soft);
+
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
 }
+
 h3 .from a,
 h4 > a:first-child,
 .from a {
-  color: #00715d;
-  font-size: 18px;
+  color: var(--green);
+
+  font-size: 17px;
+  line-height: 1.45;
   font-weight: 700;
 }
-.manager-icon,
-.owner-icon {
-  display: inline-block;
-  margin: 0 6px;
-  padding: 0 4px;
-  border-radius: 3px;
-  color: #fff;
-  background: #6f8f63;
-  font-size: 13px;
-  line-height: 1.45;
-}
-.pubtime,
-.topic-meta,
-.create-time,
-.update-time,
-.ip-location {
-  color: #697577;
-  font-size: 14px;
-  font-weight: 600;
-}
-blockquote {
-  margin: 10px 0 16px;
-  padding: 10px 14px;
-  color: #334343;
-  border-left: 3px solid #d7ded4;
-  background: #f4f5f1;
-}
-pre, code {
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-table {
-  max-width: 100%;
-  border-collapse: collapse;
-}
+
+
+/* =========================================================
+   页面主体
+   ========================================================= */
 
 .article {
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
 }
+
 #content,
 .article,
 .mod,
 .mod-bd {
   width: 100% !important;
 }
-#topic-content.topic-content,
-.comment-item {
-  display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  column-gap: 18px;
-  max-width: 100%;
-}
-#topic-content.topic-content {
-  padding: 26px 0 28px;
-  border-bottom: 1px solid #e5e1d9;
-}
-.comment-item {
-  margin: 0;
-  padding: 28px 0 30px;
-  border-bottom: 1px solid #e5e1d9;
-  list-style: none;
-}
+
 .reply-doc,
 .topic-doc,
 .rich-content,
@@ -507,104 +949,319 @@ table {
   min-width: 0;
   max-width: 100%;
 }
-.bg-img-green {
-  background: transparent !important;
+
+
+/* =========================================================
+   楼主 / 帖子正文
+   ========================================================= */
+
+#topic-content.topic-content {
+  display: grid;
+
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 18px;
+
+  width: 100%;
+  max-width: 100%;
+
+  padding: 28px 0 34px;
+
+  border-bottom: 1px solid var(--line);
 }
-.reply-content,
-.topic-richtext {
-  color: #1f2a2a;
+
+.topic-richtext,
+.rich-content {
+  color: var(--text);
+
   font-size: 17px;
+  line-height: 1.82;
 }
+
+.topic-richtext {
+  margin-top: 12px;
+}
+
+
+/* =========================================================
+   回复区
+   ========================================================= */
+
+.comment-item {
+  display: grid;
+
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 18px;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 25px 0 27px;
+
+  border-bottom: 1px solid var(--line);
+
+  list-style: none;
+
+  transition:
+    background .18s ease,
+    border-color .18s ease;
+}
+
+.comment-item:hover {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(22, 128, 95, .018),
+      transparent 75%
+    );
+}
+
+.reply-content,
+.markdown {
+  color: var(--text);
+
+  font-size: 16px;
+  line-height: 1.78;
+}
+
 .reply-content {
-  margin-top: 6px;
+  margin-top: 7px;
   clear: both;
 }
-.markdown {
-  white-space: normal;
-  word-break: break-word;
-}
-.markdown blockquote,
-.reply-quote,
-.ref-comment {
-  margin: 8px 0 16px;
-  padding: 10px 14px;
-  color: #405050;
-  border-left: 3px solid #d7ded4;
-  background: #f4f5f1;
-}
+
+
+/* =========================================================
+   用户头像
+   ========================================================= */
+
 .user-face,
 .avatar {
   flex-shrink: 0;
-  width: 58px;
+  width: 56px;
 }
+
 .user-face a,
 .avatar a {
   display: block;
 }
+
 .user-face img,
 .avatar img,
 img.pil {
   display: block;
-  width: 48px !important;
-  height: 48px !important;
-  max-width: 48px !important;
-  max-height: 48px !important;
+
+  width: 46px !important;
+  height: 46px !important;
+
+  max-width: 46px !important;
+  max-height: 46px !important;
+
   object-fit: cover;
-  border-radius: 6px;
-  background: #e8e5dd;
+
+  border-radius: 50%;
+
+  background: #e8e9e5;
+
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, .045),
+    0 3px 10px rgba(0, 0, 0, .06);
 }
-.topic-richtext img,
-.reply-content img,
-.markdown img,
-.content img:not(.pil) {
-  display: block;
-  max-width: min(100%, 720px) !important;
-  height: auto !important;
-  margin: 12px 0;
-  border-radius: 2px;
+
+
+/* =========================================================
+   用户信息
+   ========================================================= */
+
+.manager-icon,
+.owner-icon {
+  display: inline-block;
+
+  margin-left: 5px;
+  padding: 1px 6px;
+
+  color: var(--green-dark);
+  background: var(--green-soft);
+
+  border-radius: 4px;
+
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 650;
 }
+
+.pubtime,
+.topic-meta,
+.create-time,
+.update-time,
+.ip-location {
+  color: var(--text-muted);
+
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.topic-meta {
+  margin-top: 2px;
+}
+
+
+/* =========================================================
+   引用
+   ========================================================= */
+
+blockquote,
+.markdown blockquote,
+.reply-quote,
+.ref-comment {
+  margin: 15px 0 19px;
+  padding: 13px 16px 13px 18px;
+
+  color: #68716d;
+  background: #f6f7f4;
+
+  border: 1px solid #e7eae5;
+  border-left: 3px solid #b5c9bd;
+  border-radius: 0 8px 8px 0;
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* 引用中的原评论作者 */
+.reply-quote .pubdate,
+.reply-quote-content .pubdate,
+.ref-comment .pubdate,
+.markdown blockquote .pubdate {
+  color: #00715d !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+/* 豆瓣引用内部外壳不再重复画框 */
+.reply-quote-content {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* =========================================================
+   Markdown / 代码
+   ========================================================= */
+
+pre,
+code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+code {
+  padding: 2px 5px;
+
+  color: #40504a;
+  background: #f1f3ef;
+
+  border-radius: 4px;
+
+  font-size: .9em;
+}
+
+pre {
+  padding: 14px 16px;
+
+  background: #f5f6f3;
+
+  border: 1px solid var(--line);
+
+  border-radius: 8px;
+
+  overflow-x: auto;
+}
+
+
+/* =========================================================
+   评论图片
+   ========================================================= */
+
 .comment-photos {
   display: block !important;
+
   clear: both;
+
   width: 100% !important;
-  margin: 10px 0 18px !important;
+
+  margin: 12px 0 20px !important;
   padding: 0 !important;
 }
+
 .cmt-img-wrapper,
 .cmt-img {
   display: block !important;
+
   width: auto !important;
   height: auto !important;
+
   max-width: 100% !important;
+
   overflow: visible !important;
 }
+
 .cmt-img img,
 .comment-photos img {
   display: block !important;
+
   width: auto !important;
   height: auto !important;
+
   max-width: min(100%, 720px) !important;
   max-height: none !important;
-  margin: 12px 0 18px !important;
+
+  margin: 14px 0 20px !important;
+
   object-fit: contain !important;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 3px 14px rgba(0, 0, 0, .07);
 }
+
+
+/* =========================================================
+   投票
+   ========================================================= */
+
 .douban-archive-poll,
 [class*="poll"]:not(.comment-vote),
 [class*="vote"]:not(.comment-vote):not(.lnk-reaction) {
   max-width: 720px;
-  margin: 20px 0;
-  padding: 16px 18px;
-  border: 1px solid #e0ded6;
-  border-left: 4px solid #7a946b;
-  border-radius: 6px;
-  background: #f8f8f4;
+
+  margin: 22px 0;
+
+  padding: 18px 20px;
+
+  background: #f8faf7;
+
+  border: 1px solid #e0e8e1;
+  border-left: 4px solid var(--green);
+
+  border-radius: 9px;
 }
+
 .douban-archive-poll-title {
-  margin: 0 0 10px;
-  color: #5f7656;
-  font-size: 14px;
+  margin: 0 0 13px;
+
+  color: var(--green-dark);
+
+  font-size: 13px;
   font-weight: 700;
+
+  letter-spacing: .02em;
 }
+
 .douban-archive-poll button,
 .douban-archive-poll input[type="radio"],
 .douban-archive-poll input[type="checkbox"],
@@ -613,124 +1270,88 @@ img.pil {
 [class*="poll"] input[type="checkbox"] {
   display: none !important;
 }
+
+
+/* =========================================================
+   清理豆瓣原页面杂项
+   ========================================================= */
+
 .clear,
 .clearfix::after {
   display: none;
 }
+
 .single-file-missing-image {
   display: none !important;
 }
-@media (max-width: 720px) {
-  .markdown, .reply-content, .topic-richtext, .ref-content, p, div, span {
-    word-break: break-word !important;
-    white-space: normal !important;
-  }
-  html {
-    background: #fff;
-  }
-  body {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0 16px 42px;
-    overflow-x: hidden;
-  }
-  #topic-content.topic-content,
-  .comment-item {
-    grid-template-columns: 42px minmax(0, 1fr);
-    column-gap: 10px;
-    width: 100%;
-  }
-  .user-face,
-  .avatar {
-    width: 38px;
-  }
-  .user-face img,
-  .avatar img,
-  img.pil {
-    width: 34px !important;
-    height: 34px !important;
-    max-width: 34px !important;
-    max-height: 34px !important;
-  }
-  .comment-item > .reply-doc,
-  #topic-content.topic-content > .topic-doc {
-  }
-  .comment-item .bg-img-green,
-  #topic-content.topic-content .topic-meta,
-  #topic-content.topic-content h3,
-  #topic-content.topic-content h4 {
-    grid-column: 2;
-    min-width: 0;
-  }
-  .comment-item .reply-content,
-  .comment-item .markdown,
-  .comment-item .comment-photos,
-  #topic-content.topic-content .topic-richtext,
-  #topic-content.topic-content .rich-content,
-  #topic-content.topic-content .markdown,
-  #topic-content.topic-content .douban-archive-poll {
-    grid-column: 1 / -1;
-  }
-  .reply-content,
-  .topic-richtext {
-    font-size: 16px;
-    line-height: 1.72;
-  }
-  .markdown blockquote,
-  .reply-quote,
-  .ref-comment,
-  blockquote {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 9px 12px;
-  }
-  .douban-archive-poll,
-  [class*="poll"]:not(.comment-vote),
-  [class*="vote"]:not(.comment-vote):not(.lnk-reaction) {
-    max-width: 100%;
-    margin: 16px 0;
-    padding: 12px 14px;
-  }
-  img,
-  .topic-richtext img,
-  .reply-content img,
-  .markdown img,
-  .content img:not(.pil),
-  .cmt-img img,
-  .comment-photos img {
-    max-width: 100% !important;
-  }
-  h1 {
-    font-size: 21px;
-  }
-  h3 .from a,
-  h4 > a:first-child,
-  .from a {
-    font-size: 16px;
-  }
+
+
+/* =========================================================
+   页面中的特殊内容
+   ========================================================= */
+
+.bg-img-green {
+  background: transparent !important;
 }
+
+table {
+  max-width: 100%;
+
+  border-collapse: collapse;
+}
+
+table td,
+table th {
+  padding: 8px 10px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+
+/* =========================================================
+   Lightbox
+   ========================================================= */
+
 .single-file-lightbox {
   position: fixed;
+
   inset: 0;
+
   z-index: 999999;
+
   display: none;
+
   align-items: center;
   justify-content: center;
+
   padding: 24px;
-  background: rgba(0, 0, 0, 0.82);
+
+  background: rgba(24, 28, 27, .88);
+
+  backdrop-filter: blur(5px);
 }
+
 .single-file-lightbox img {
   max-width: 96vw;
   max-height: 94vh;
+
   cursor: zoom-out;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+
+  border-radius: 6px;
+
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, .35);
 }
+
 .single-file-lightbox.is-open {
   display: flex;
 }
 
-/* Fallback cleanup if a Douban interaction block was not removed structurally. */
+
+/* =========================================================
+   豆瓣交互元素全部隐藏
+   ========================================================= */
+
 #db-global-nav,
 #db-nav-group,
 .global-nav,
@@ -766,8 +1387,174 @@ img.pil {
 #reply_form {
   display: none !important;
 }
+
+
+/* =========================================================
+   手机端
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .archive-home-link {
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+  html {
+    background: #fff;
+  }
+
+  body {
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+
+    padding: 0 16px 42px;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    overflow-x: hidden;
+  }
+
+  .markdown,
+  .reply-content,
+  .topic-richtext,
+  .ref-content,
+  p,
+  div,
+  span {
+    word-break: break-word !important;
+    white-space: normal !important;
+  }
+
+  h1 {
+    padding: 25px 0 19px;
+
+    font-size: 22px;
+    line-height: 1.45;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h3 .from a,
+  h4 > a:first-child,
+  .from a {
+    font-size: 15px;
+  }
+
+  #topic-content.topic-content,
+  .comment-item {
+    grid-template-columns: 38px minmax(0, 1fr);
+
+    column-gap: 10px;
+
+    width: 100%;
+  }
+
+  #topic-content.topic-content {
+    padding: 23px 0 28px;
+  }
+
+  .comment-item {
+    padding: 21px 0 24px;
+  }
+
+  .user-face,
+  .avatar {
+    width: 38px;
+  }
+
+  .user-face img,
+  .avatar img,
+  img.pil {
+    width: 34px !important;
+    height: 34px !important;
+
+    max-width: 34px !important;
+    max-height: 34px !important;
+  }
+
+  .reply-content,
+  .topic-richtext {
+    font-size: 16px;
+    line-height: 1.78;
+  }
+
+  .comment-item .bg-img-green,
+  #topic-content.topic-content .topic-meta,
+  #topic-content.topic-content h3,
+  #topic-content.topic-content h4 {
+    grid-column: 2;
+
+    min-width: 0;
+  }
+
+  .comment-item .reply-content,
+  .comment-item .markdown,
+  .comment-item .comment-photos,
+  #topic-content.topic-content .topic-richtext,
+  #topic-content.topic-content .rich-content,
+  #topic-content.topic-content .markdown,
+  #topic-content.topic-content .douban-archive-poll {
+    grid-column: 1 / -1;
+  }
+
+  .markdown blockquote,
+  .reply-quote,
+  .ref-comment,
+  blockquote {
+    margin-left: 0;
+    margin-right: 0;
+
+    padding: 10px 13px;
+  }
+
+  .douban-archive-poll,
+  [class*="poll"]:not(.comment-vote),
+  [class*="vote"]:not(.comment-vote):not(.lnk-reaction) {
+    max-width: 100%;
+
+    margin: 16px 0;
+
+    padding: 13px 14px;
+  }
+
+  img,
+  .topic-richtext img,
+  .reply-content img,
+  .markdown img,
+  .content img:not(.pil),
+  .cmt-img img,
+  .comment-photos img {
+    max-width: 100% !important;
+  }
+
+  .topic-richtext img,
+  .reply-content img,
+  .markdown img,
+  .content img:not(.pil),
+  .cmt-img img,
+  .comment-photos img {
+    margin-top: 12px;
+    margin-bottom: 17px;
+
+    border-radius: 7px;
+  }
+
+  .pubtime,
+  .topic-meta,
+  .create-time,
+  .update-time,
+  .ip-location {
+    font-size: 11px;
+  }
+}
 </style></head>
-<body>
+<body><a class="archive-home-link" href="../index.html">← 返回首页</a>
 
 
 
@@ -784,7 +1571,7 @@ img.pil {
 <!-- 翻页计数使用 -->
 <input id="start" type="hidden" value="200"/>
 
-<ul class="topic-reply" id="comments">
+<h3 class="popular-hd all-comments-hd">全部回复</h3><ul class="topic-reply" id="comments">
 <li class="clearfix comment-item reply-item" data-author-id="212980336" data-cid="6673843804" data-is_folded="False" data-target_kind="1013" id="6673843804">
 <div class="user-face">
 <img alt="呱呱不嘻嘻" class="pil" src="data:image/jpeg;base64,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"/>
@@ -3229,9 +4016,10 @@ momo
 </span>
 <a href="1.html">1</a>
 <a href="2.html">2</a>
-<span class="thispage" data-total-page="5">3</span>
+<span class="thispage" data-total-page="6">3</span>
 <a href="4.html">4</a>
 <a href="5.html">5</a>
+<a href="6.html">6</a>
 <span class="next">
 
 <a href="4.html">后页&gt;</a>
@@ -3256,7 +4044,7 @@ momo
 
 <!-- douban ad begin -->
 <!-- douban ad end -->
-<!-- dae-web-group--default-b95f6965c-vxkbl-->
+<!-- dae-web-group--default-54f9b4589-2z8k5-->
 <script>
 (function () {
     function ready(fn) {
