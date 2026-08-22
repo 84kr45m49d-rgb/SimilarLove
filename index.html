@@ -274,8 +274,6 @@ body {
     border-radius: 5px;
 }
 
-/*  */
-
 .pocket {
     position: absolute;
     right: 29px;
@@ -388,7 +386,9 @@ body {
 
     display: block;
 
-    padding: 22px 24px 20px 27px;
+    min-height: 168px;
+
+    padding: 30px 30px 27px 34px;
 
     background:
         linear-gradient(
@@ -442,148 +442,2690 @@ body {
         0 0 0 4px rgba(79,190,230,.06);
 }
 
-.row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    gap: 18px;
-}
-
 .title {
     color: #294b60;
 
     font-size: 17px;
     font-weight: 750;
 
-    line-height: 1.55;
+    line-height: 1.7;
 
     transition: color .2s ease;
 }
 
-.post-item:hover .title {
-    color: var(--blue-dark);
-}
 
-.date {
-    display: inline-block;
-
-    margin-top: 10px;
-
-    padding: 3px 9px;
-
-    border-radius: 20px;
-
-    background: #eef9fd;
-    border: 1px solid #d6eef7;
-
-    color: #70a0b5;
-
-    font-size: 10px;
-    font-weight: 600;
-
-    white-space: nowrap;
-}
-
-.desc {
-    margin-top: 9px;
-
-    padding-left: 2px;
-
-    color: #86a0ad;
-
-    font-size: 13px;
-    line-height: 1.65;
-}
 
 /* =========================================================
-   底部
+   婆婆子 · FINAL REAL NEON SIGN
+   红色霓虹框 + 暖白霓虹文字
    ========================================================= */
 
-.footer {
-    margin-top: 38px;
+.post-item.bopo-card{
 
-    text-align: center;
+    position:relative;
 
-    color: #8ca8b5;
+    min-height:150px !important;
 
-    font-size: 11px;
-    letter-spacing: 1.5px;
+    margin-bottom:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:32px 28px;
+
+    overflow:hidden;
+
+    /*
+       黑色玻璃底
+    */
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            rgba(255,45,25,.12),
+            transparent 62%
+        ),
+
+        radial-gradient(
+            ellipse at 50% 100%,
+            rgba(120, 20, 30, .16),
+            transparent 70%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.055),
+            rgba(70,15,24,.10) 55%,
+            rgba(12,3,8,.25) 100%
+        ),
+
+        rgba(18, 7, 12, .90) !important;
+
+    /*
+       第一层：真正的红色霓虹管
+    */
+
+    border:2px solid #ff3030 !important;
+
+    /*
+       红色灯管 + 红色环境光
+    */
+
+    box-shadow:
+
+        0 0 3px #ff3030,
+
+        0 0 7px #ff3030,
+
+        0 0 15px rgba(255,45,45,.95),
+
+        0 0 30px rgba(255,35,35,.65),
+
+        0 0 58px rgba(255,25,25,.32),
+
+        inset 0 0 8px rgba(255,45,45,.16),
+
+        inset 0 0 25px rgba(255,45,45,.07);
+
+    transition:
+        transform .2s ease,
+        filter .2s ease,
+        box-shadow .2s ease;
+
+    animation:
+        bopoNeonCurrent 6s ease-in-out infinite;
 }
 
-.footer::before {
-    content: "✦";
 
-    display: block;
+/* =========================================================
+   第二层红色霓虹外溢
+   ========================================================= */
 
-    margin-bottom: 9px;
+.post-item.bopo-card::before{
 
-    color: #f2c62e;
-    font-size: 14px;
+    content:"";
+
+    position:absolute;
+
+    inset:-5px;
+
+    border:1px solid rgba(255,80,60,.58);
+
+    box-shadow:
+
+        0 0 5px rgba(255,50,40,.9),
+
+        0 0 14px rgba(255,45,45,.65),
+
+        0 0 30px rgba(255,35,35,.35);
+
+    pointer-events:none;
+
+    opacity:.78;
 }
+
+
+/* =========================================================
+   顶部玻璃反光
+   ========================================================= */
+
+.post-item.bopo-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:10%;
+
+    right:10%;
+
+    top:8px;
+
+    height:1px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,220,205,.35),
+            rgba(255,255,255,.75),
+            rgba(255,220,205,.35),
+            transparent
+        );
+
+    box-shadow:
+        0 0 6px rgba(255,180,150,.4);
+
+    opacity:.55;
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   婆婆子文字
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text{
+
+    position:relative;
+
+    z-index:5;
+
+    color:#fff8e9 !important;
+
+    font-family:
+        'Noto Sans SC',
+        'PingFang SC',
+        'Microsoft YaHei',
+        sans-serif;
+
+    font-size:
+        clamp(25px,5vw,36px);
+
+    font-weight:900;
+
+    letter-spacing:
+        clamp(4px,1vw,8px);
+
+    line-height:1.3;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+    /*
+       重点：
+       字芯白
+       第一圈也是白
+       后面才出现非常淡的橙色
+    */
+
+    text-shadow:
+
+        0 0 1px #ffffff,
+
+        0 0 3px #ffffff,
+
+        0 0 6px rgba(255,255,250,1),
+
+        0 0 11px rgba(255,248,225,.95),
+
+        0 0 18px rgba(255,220,170,.75),
+
+        0 0 30px rgba(255,170,90,.48),
+
+        0 0 48px rgba(255,120,45,.24) !important;
+
+    -webkit-text-stroke:
+        .3px rgba(255,255,255,.65);
+
+    animation:
+        bopoTextGlow 4.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   文字两侧小灯管
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text::before,
+.post-item.bopo-card .bopo-text::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:50%;
+
+    width:30px;
+
+    height:2px;
+
+    background:#ff3434;
+
+    box-shadow:
+
+        0 0 4px #ff3434,
+
+        0 0 9px #ff3434,
+
+        0 0 18px rgba(255,45,45,.8);
+
+    transform:translateY(-50%);
+
+    opacity:.9;
+}
+
+.post-item.bopo-card .bopo-text::before{
+    right:100%;
+    margin-right:18px;
+}
+
+.post-item.bopo-card .bopo-text::after{
+    left:100%;
+    margin-left:18px;
+}
+
+
+/* =========================================================
+   文字正常通电呼吸
+   ========================================================= */
+
+@keyframes bopoTextGlow{
+
+    0%,100%{
+
+        opacity:.96;
+
+        text-shadow:
+
+            0 0 1px #fff,
+
+            0 0 3px #fff,
+
+            0 0 6px rgba(255,255,250,1),
+
+            0 0 11px rgba(255,248,225,.92),
+
+            0 0 18px rgba(255,220,170,.68),
+
+            0 0 30px rgba(255,170,90,.42),
+
+            0 0 48px rgba(255,120,45,.20);
+    }
+
+    48%{
+        opacity:1;
+    }
+
+    50%{
+
+        opacity:1.08;
+
+        text-shadow:
+
+            0 0 1px #fff,
+
+            0 0 4px #fff,
+
+            0 0 8px #fffef5,
+
+            0 0 14px #fff5dc,
+
+            0 0 22px rgba(255,225,180,.9),
+
+            0 0 38px rgba(255,175,100,.58),
+
+            0 0 58px rgba(255,120,50,.28);
+    }
+
+    53%{
+        opacity:.96;
+    }
+}
+
+
+/* =========================================================
+   红色灯框轻微电流波动
+   ========================================================= */
+
+@keyframes bopoNeonCurrent{
+
+    0%,100%{
+
+        filter:brightness(.96);
+
+        box-shadow:
+
+            0 0 3px #ff3030,
+
+            0 0 7px #ff3030,
+
+            0 0 15px rgba(255,45,45,.95),
+
+            0 0 30px rgba(255,35,35,.65),
+
+            0 0 58px rgba(255,25,25,.32),
+
+            inset 0 0 8px rgba(255,45,45,.16),
+
+            inset 0 0 25px rgba(255,45,45,.07);
+    }
+
+    47%{
+        filter:brightness(1);
+    }
+
+    49%{
+
+        filter:brightness(1.12);
+
+        box-shadow:
+
+            0 0 4px #ff3838,
+
+            0 0 10px #ff3838,
+
+            0 0 20px rgba(255,55,45,1),
+
+            0 0 40px rgba(255,40,35,.78),
+
+            0 0 72px rgba(255,25,25,.40),
+
+            inset 0 0 11px rgba(255,55,45,.22),
+
+            inset 0 0 30px rgba(255,45,45,.09);
+    }
+
+    51%{
+        filter:brightness(.93);
+    }
+
+    53%{
+        filter:brightness(1.04);
+    }
+
+    55%{
+        filter:brightness(.98);
+    }
+}
+
+
+/* =========================================================
+   偶尔轻微接触不良
+   ========================================================= */
+
+@keyframes bopoTinyFlicker{
+
+    0%,96%,100%{
+        opacity:1;
+    }
+
+    97%{
+        opacity:.82;
+    }
+
+    97.3%{
+        opacity:1;
+    }
+
+    98%{
+        opacity:.9;
+    }
+
+    98.2%{
+        opacity:1;
+    }
+}
+
+.post-item.bopo-card .bopo-text{
+    animation:
+        bopoTextGlow 4.5s ease-in-out infinite,
+        bopoTinyFlicker 9s steps(1,end) infinite;
+}
+
+
+/* =========================================================
+   鼠标悬停
+   ========================================================= */
+
+.post-item.bopo-card:hover{
+
+    transform:scale(1.018);
+
+    filter:brightness(1.1);
+
+    box-shadow:
+
+        0 0 4px #ff3030,
+
+        0 0 10px #ff3030,
+
+        0 0 20px rgba(255,45,45,1),
+
+        0 0 40px rgba(255,35,35,.82),
+
+        0 0 75px rgba(255,25,25,.48),
+
+        0 0 110px rgba(255,20,20,.20),
+
+        inset 0 0 12px rgba(255,45,45,.22),
+
+        inset 0 0 35px rgba(255,45,45,.10);
+}
+
+.post-item.bopo-card:hover .bopo-text{
+
+    text-shadow:
+
+        0 0 1px #fff,
+
+        0 0 4px #fff,
+
+        0 0 8px #fff,
+
+        0 0 14px #fff9e8,
+
+        0 0 23px #ffe7bc,
+
+        0 0 36px rgba(255,190,110,.85),
+
+        0 0 58px rgba(255,130,50,.42) !important;
+}
+
 
 /* =========================================================
    手机端
    ========================================================= */
 
-@media (max-width: 640px) {
+@media (max-width:700px){
 
-    .container {
-        width: calc(100% - 20px);
-        padding-top: 25px;
+    .post-item.bopo-card{
+
+        min-height:125px !important;
+
+        padding:
+            25px 20px;
     }
 
-    .header {
-        padding: 27px 18px 25px;
-        border-radius: 25px;
+    .post-item.bopo-card .bopo-text{
+
+        font-size:
+            clamp(21px,7vw,31px);
+
+        letter-spacing:
+            clamp(3px,1.2vw,7px);
     }
 
-    .header h1 {
-        font-size: 23px;
-        letter-spacing: 2px;
+    .post-item.bopo-card .bopo-text::before,
+    .post-item.bopo-card .bopo-text::after{
+
+        width:18px;
     }
 
-    .header-sub {
-        font-size: 11px;
-        letter-spacing: 1px;
+    .post-item.bopo-card .bopo-text::before{
+        margin-right:10px;
     }
 
-    .bell {
-        left: 17px;
-        top: 18px;
-        transform: scale(.8);
+    .post-item.bopo-card .bopo-text::after{
+        margin-left:10px;
+    }
+}
+
+
+
+/* =========================================================
+   FINAL FINAL OVERRIDE
+   婆婆子 / 来日方长 / 普通帖子
+   统一经典霓虹视觉
+   Desktop + Mobile
+   ========================================================= */
+
+
+/* =========================================================
+   ① 所有主要卡片：统一圆角
+   ========================================================= */
+
+.header,
+.post-item,
+.post-item.bopo-card,
+.post-item.cyber-card{
+
+    border-radius:16px !important;
+}
+
+
+/* =========================================================
+   ② 婆婆子
+   CLASSIC RED NEON SIGN
+   深炭黑 + 樱桃红 + 暖白
+   ========================================================= */
+
+.post-item.bopo-card{
+
+    /*
+       明显加高
+    */
+
+    min-height:190px !important;
+
+    height:auto !important;
+
+    padding:
+        42px 30px !important;
+
+    margin-bottom:30px !important;
+
+    /*
+       经典霓虹招牌底色
+
+       不纯黑
+       不藏蓝
+       不酒红
+
+       是偏暖的深炭黑
+    */
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 50%,
+            rgba(255,45,45,.075),
+            transparent 62%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,0) 32%
+        ),
+
+        #171416 !important;
+
+    /*
+       经典樱桃红灯框
+    */
+
+    border:
+        2px solid #ff3038 !important;
+
+    box-shadow:
+
+        0 0 3px #ff3038,
+
+        0 0 8px #ff3038,
+
+        0 0 17px rgba(255,48,56,.88),
+
+        0 0 34px rgba(255,42,48,.58),
+
+        0 0 58px rgba(255,38,45,.30),
+
+        inset 0 0 12px rgba(255,48,56,.12),
+
+        inset 0 0 30px rgba(255,48,56,.055);
+
+}
+
+
+/* =========================================================
+   婆婆子外框
+   ========================================================= */
+
+.post-item.bopo-card::before{
+
+    border-radius:13px !important;
+
+    border:
+        1px solid rgba(255,100,90,.48) !important;
+
+    box-shadow:
+
+        0 0 5px rgba(255,55,55,.8),
+
+        0 0 14px rgba(255,45,45,.55),
+
+        0 0 28px rgba(255,45,45,.28) !important;
+}
+
+
+/* =========================================================
+   婆婆子顶部反光
+   ========================================================= */
+
+.post-item.bopo-card::after{
+
+    border-radius:50% !important;
+
+    opacity:.48 !important;
+}
+
+
+/* =========================================================
+   婆婆子文字
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text{
+
+    /*
+       暖白，不偏粉
+    */
+
+    color:#fff8e8 !important;
+
+    font-size:
+        clamp(27px,5vw,38px) !important;
+
+    font-weight:900 !important;
+
+    letter-spacing:
+        clamp(4px,1vw,9px) !important;
+
+    line-height:1.4 !important;
+
+    /*
+       白色灯芯
+       淡淡琥珀色外溢
+
+       红色不染字
+    */
+
+    text-shadow:
+
+        0 0 1px #ffffff,
+
+        0 0 3px #ffffff,
+
+        0 0 7px rgba(255,255,250,1),
+
+        0 0 12px rgba(255,248,225,.96),
+
+        0 0 20px rgba(255,220,175,.72),
+
+        0 0 34px rgba(255,175,95,.42),
+
+        0 0 52px rgba(255,125,45,.20) !important;
+}
+
+
+/* =========================================================
+   重点：
+   文案前后彻底取消横线 / “-”视觉
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text::before,
+.post-item.bopo-card .bopo-text::after{
+
+    content:none !important;
+
+    display:none !important;
+}
+
+
+/* =========================================================
+   ③ 来日方长卡片
+   通常就是首页 header
+   ========================================================= */
+
+.header{
+
+    border-radius:16px !important;
+
+    overflow:hidden !important;
+
+    /*
+       不改变原来的颜色体系
+       只让它和下面的卡片拥有统一的圆角
+    */
+
+}
+
+
+/* =========================================================
+   ④ 普通帖子卡片
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card){
+
+    border-radius:16px !important;
+
+    overflow:hidden !important;
+
+    /*
+       卡片之间留出更舒服的呼吸空间
+    */
+
+    margin-bottom:18px !important;
+
+}
+
+
+/* =========================================================
+   普通帖子：标题
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .title{
+
+    display:block !important;
+
+    margin-top:0 !important;
+
+    margin-bottom:11px !important;
+
+    line-height:1.72 !important;
+
+}
+
+
+/* =========================================================
+   普通帖子：描述
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .desc{
+
+    display:block !important;
+
+    margin-top:0 !important;
+
+    margin-bottom:11px !important;
+
+    line-height:1.72 !important;
+
+}
+
+
+/* =========================================================
+   普通帖子：日期
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .date{
+
+    display:block !important;
+
+    margin-top:0 !important;
+
+    padding-top:2px !important;
+
+    line-height:1.5 !important;
+
+}
+
+
+/* =========================================================
+   普通帖子内部整体
+   防止标题 / 描述 / 日期挤成一坨
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card){
+
+    line-height:1.65 !important;
+}
+
+
+/* =========================================================
+   ⑤ cyber-card 也统一圆角
+   ========================================================= */
+
+.post-item.cyber-card{
+
+    border-radius:16px !important;
+
+    overflow:hidden !important;
+
+    margin-bottom:18px !important;
+}
+
+
+/* =========================================================
+   ⑥ 桌面端
+   ========================================================= */
+
+@media (min-width:701px){
+
+    .post-item.bopo-card{
+
+        min-height:200px !important;
+
+        padding:
+            48px 40px !important;
     }
 
-    .pocket {
-        right: -15px;
+    .post-item.bopo-card .bopo-text{
+
+        font-size:
+            clamp(30px,3.2vw,42px) !important;
     }
 
-    .archive-label {
-        margin-top: 27px;
+    .post-item:not(.bopo-card):not(.cyber-card){
+
+        padding-top:24px !important;
+
+        padding-bottom:24px !important;
     }
 
-    .post-item {
-        padding: 19px 17px 17px 21px;
-        border-radius: 15px;
+}
+
+
+/* =========================================================
+   ⑦ 手机端
+   ========================================================= */
+
+@media (max-width:700px){
+
+    /*
+       婆婆子手机端也加高
+    */
+
+    .post-item.bopo-card{
+
+        min-height:155px !important;
+
+        padding:
+            36px 20px !important;
+
+        margin-bottom:22px !important;
+
+        border-radius:14px !important;
     }
 
-    .row {
-        flex-direction: column;
-        gap: 8px;
+
+    .post-item.bopo-card .bopo-text{
+
+        font-size:
+            clamp(22px,7.2vw,32px) !important;
+
+        letter-spacing:
+            clamp(3px,1.2vw,7px) !important;
+
+        white-space:nowrap;
+
+        line-height:1.45 !important;
     }
 
-    .title {
-        font-size: 15px;
-        line-height: 1.55;
+
+    /*
+       普通帖子手机端
+       标题 / 描述 / 日期重新拉开
+    */
+
+    .post-item:not(.bopo-card):not(.cyber-card){
+
+        border-radius:14px !important;
+
+        padding:
+            20px 18px !important;
+
+        margin-bottom:15px !important;
     }
 
-    .date {
-        font-size: 10px;
+
+    .post-item:not(.bopo-card):not(.cyber-card) .title{
+
+        margin-bottom:9px !important;
+
+        line-height:1.72 !important;
     }
 
-    .desc {
-        font-size: 12px;
+
+    .post-item:not(.bopo-card):not(.cyber-card) .desc{
+
+        margin-bottom:9px !important;
+
+        line-height:1.72 !important;
     }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .date{
+
+        padding-top:2px !important;
+
+        line-height:1.5 !important;
+    }
+
+
+    .header{
+
+        border-radius:14px !important;
+    }
+
+
+    .post-item.cyber-card{
+
+        border-radius:14px !important;
+    }
+
+}
+
+
+/* =========================================================
+   FINAL
+   =========================================================
+
+
+/* =========================================================
+   普通帖子卡片 · FINAL POLISH
+   最后更新时间 → 信息标签
+   ========================================================= */
+
+
+/* =========================================================
+   普通帖子整体
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card){
+
+    border-radius:16px !important;
+
+    overflow:hidden !important;
+
+    margin-bottom:18px !important;
+
+    padding:
+        25px 28px !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,0) 45%
+        ) !important;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+
+/* =========================================================
+   标题
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .title{
+
+    display:block !important;
+
+    margin:
+        0 0 10px 0 !important;
+
+    font-size:
+        17px !important;
+
+    font-weight:
+        750 !important;
+
+    line-height:
+        1.72 !important;
+
+}
+
+
+/* =========================================================
+   描述
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .desc{
+
+    display:block !important;
+
+    margin:
+        0 0 13px 0 !important;
+
+    font-size:
+        13px !important;
+
+    line-height:
+        1.7 !important;
+
+    opacity:
+        .78;
+
+}
+
+
+/* =========================================================
+   最后更新时间
+   变成“小型信息标签”
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .date{
+
+    display:
+        inline-flex !important;
+
+    align-items:
+        center;
+
+    width:
+        fit-content;
+
+    box-sizing:
+        border-box;
+
+    margin:
+        2px 0 0 0 !important;
+
+    padding:
+        5px 10px !important;
+
+    border:
+        1px solid rgba(120,155,175,.22);
+
+    border-radius:
+        7px;
+
+    background:
+        rgba(20,32,42,.55);
+
+    color:
+        rgba(150,180,195,.78) !important;
+
+    font-size:
+        10px !important;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        .35px;
+
+    line-height:
+        1.35 !important;
+
+    white-space:
+        nowrap;
+
+    box-shadow:
+        inset 0 0 8px rgba(100,150,180,.025);
+}
+
+
+/* =========================================================
+   标签左侧小圆点
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .date::before{
+
+    content:"";
+
+    width:5px;
+
+    height:5px;
+
+    margin-right:7px;
+
+    border-radius:50%;
+
+    background:
+        rgba(120,190,210,.8);
+
+    box-shadow:
+        0 0 5px rgba(100,190,210,.45);
+
+    flex:none;
+}
+
+
+/* =========================================================
+   鼠标经过普通帖子
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card):hover{
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 7px 24px rgba(0,0,0,.12);
+}
+
+
+/* =========================================================
+   标签 hover
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card):hover .date{
+
+    border-color:
+        rgba(120,190,210,.35);
+
+    color:
+        rgba(175,205,215,.9) !important;
+
+    background:
+        rgba(25,40,50,.62);
+
+}
+
+
+/* =========================================================
+   手机端
+   ========================================================= */
+
+@media (max-width:700px){
+
+    .post-item:not(.bopo-card):not(.cyber-card){
+
+        padding:
+            20px 18px !important;
+
+        margin-bottom:
+            15px !important;
+
+        border-radius:
+            14px !important;
+    }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .title{
+
+        margin-bottom:
+            9px !important;
+
+        font-size:
+            16px !important;
+
+        line-height:
+            1.72 !important;
+    }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .desc{
+
+        margin-bottom:
+            11px !important;
+
+        font-size:
+            12px !important;
+
+        line-height:
+            1.72 !important;
+    }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .date{
+
+        padding:
+            5px 9px !important;
+
+        font-size:
+            9px !important;
+
+        border-radius:
+            6px;
+    }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .date::before{
+
+        width:4px;
+
+        height:4px;
+
+        margin-right:6px;
+    }
+
+}
+
+
+
+/* =========================================================
+   普通帖子 · ARCHIVE DATE LABEL
+   旧档案编号牌风格
+   ========================================================= */
+
+
+/* =========================================================
+   时间标签
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .date{
+
+    display:inline-flex !important;
+
+    align-items:center;
+
+    width:fit-content;
+
+    box-sizing:border-box;
+
+    margin:
+        4px 0 0 0 !important;
+
+    padding:
+        6px 11px !important;
+
+    /*
+       深墨蓝黑
+       和页面整体融合
+    */
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(35,38,43,.72),
+            rgba(18,20,24,.78)
+        ) !important;
+
+    /*
+       非常淡的香槟金边框
+    */
+
+    border:
+        1px solid rgba(205,174,118,.34) !important;
+
+    border-radius:
+        7px !important;
+
+    /*
+       暖灰白文字
+    */
+
+    color:
+        rgba(226,215,193,.82) !important;
+
+    font-size:
+        10px !important;
+
+    font-weight:
+        500 !important;
+
+    letter-spacing:
+        .45px;
+
+    line-height:
+        1.35 !important;
+
+    white-space:
+        nowrap;
+
+    /*
+       很轻的内部光
+    */
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.045),
+
+        inset 0 0 10px rgba(205,174,118,.025),
+
+        0 2px 8px rgba(0,0,0,.08);
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   左侧琥珀色状态灯
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .date::before{
+
+    content:"";
+
+    width:
+        5px;
+
+    height:
+        5px;
+
+    margin-right:
+        7px;
+
+    flex:none;
+
+    border-radius:
+        50%;
+
+    background:
+        #d6a85d;
+
+    box-shadow:
+
+        0 0 3px rgba(214,168,93,.75),
+
+        0 0 7px rgba(214,168,93,.30);
+
+}
+
+
+/* =========================================================
+   标签里的 “最后更新”
+   稍微压低
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .date{
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.5);
+}
+
+
+/* =========================================================
+   鼠标经过
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card):hover .date{
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(48,42,35,.76),
+            rgba(24,22,20,.82)
+        ) !important;
+
+    border-color:
+        rgba(220,183,115,.52) !important;
+
+    color:
+        rgba(244,232,208,.94) !important;
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.055),
+
+        0 0 10px rgba(205,160,80,.08);
+}
+
+
+/* =========================================================
+   hover 时的小灯
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card):hover .date::before{
+
+    background:
+        #f0bd68;
+
+    box-shadow:
+
+        0 0 4px rgba(240,189,104,.95),
+
+        0 0 9px rgba(240,189,104,.42);
+}
+
+
+/* =========================================================
+   手机端
+   ========================================================= */
+
+@media (max-width:700px){
+
+    .post-item:not(.bopo-card):not(.cyber-card) .date{
+
+        margin-top:
+            3px !important;
+
+        padding:
+            5px 9px !important;
+
+        font-size:
+            9px !important;
+
+        border-radius:
+            6px !important;
+
+        letter-spacing:
+            .3px;
+    }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .date::before{
+
+        width:
+            4px;
+
+        height:
+            4px;
+
+        margin-right:
+            6px;
+    }
+
+}
+
+
+/* =========================================================
+   DORAEMON BLUE FINAL
+   普通帖子统一视觉
+   白底 + 哆啦A梦蓝
+   ========================================================= */
+
+
+/* =========================================================
+   ① 普通帖子统一为同一种布局
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card){
+
+    display:block !important;
+
+    position:relative !important;
+
+    box-sizing:border-box !important;
+
+    width:100% !important;
+
+    min-height:0 !important;
+
+    height:auto !important;
+
+    margin:
+        0 0 18px 0 !important;
+
+    padding:
+        24px 28px !important;
+
+    border-radius:
+        16px !important;
+
+    overflow:hidden !important;
+
+    /*
+       哆啦A梦式白色卡片
+    */
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #fbfdff 100%
+        ) !important;
+
+    border:
+        1px solid rgba(38,154,214,.20) !important;
+
+    box-shadow:
+        0 3px 12px rgba(39,126,180,.07),
+
+        inset 0 1px 0 rgba(255,255,255,.95);
+
+    color:
+        #28445a;
+
+    text-decoration:none !important;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+
+/* =========================================================
+   ② 标题
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .title{
+
+    display:block !important;
+
+    width:100% !important;
+
+    box-sizing:border-box !important;
+
+    margin:
+        0 0 10px 0 !important;
+
+    padding:0 !important;
+
+    color:
+        #245c7c !important;
+
+    font-size:
+        17px !important;
+
+    font-weight:
+        750 !important;
+
+    line-height:
+        1.72 !important;
+
+    text-decoration:none !important;
+}
+
+
+/* =========================================================
+   ③ 描述
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .desc{
+
+    display:block !important;
+
+    width:100% !important;
+
+    box-sizing:border-box !important;
+
+    margin:
+        0 0 13px 0 !important;
+
+    padding:0 !important;
+
+    color:
+        #718a9b !important;
+
+    font-size:
+        13px !important;
+
+    font-weight:
+        400 !important;
+
+    line-height:
+        1.72 !important;
+}
+
+
+/* =========================================================
+   ④ 更新时间
+   蓝底白字
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .date{
+
+    display:inline-flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    width:auto !important;
+
+    box-sizing:border-box !important;
+
+    margin:
+        1px 0 0 0 !important;
+
+    padding:
+        5px 10px !important;
+
+    border:
+        0 !important;
+
+    border-radius:
+        7px !important;
+
+    background:
+        #269bd6 !important;
+
+    color:
+        #ffffff !important;
+
+    font-size:
+        10px !important;
+
+    font-weight:
+        600 !important;
+
+    letter-spacing:
+        .25px !important;
+
+    line-height:
+        1.4 !important;
+
+    white-space:
+        nowrap !important;
+
+    box-shadow:
+        0 2px 6px rgba(38,155,214,.18);
+
+    text-shadow:
+        none !important;
+}
+
+
+/* =========================================================
+   ⑤ 时间标签左侧白色小圆点
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .date::before{
+
+    content:"";
+
+    display:block;
+
+    width:4px;
+
+    height:4px;
+
+    margin-right:7px;
+
+    flex:none;
+
+    border-radius:50%;
+
+    background:#ffffff;
+
+    box-shadow:
+        0 0 3px rgba(255,255,255,.8);
+}
+
+
+/* =========================================================
+   ⑥ 普通帖子 hover
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card):hover{
+
+    transform:
+        translateY(-2px) !important;
+
+    border-color:
+        rgba(38,155,214,.38) !important;
+
+    box-shadow:
+        0 7px 20px rgba(38,135,185,.12),
+
+        0 0 0 1px rgba(38,155,214,.04) !important;
+}
+
+
+.post-item:not(.bopo-card):not(.cyber-card):hover .title{
+
+    color:
+        #1689c5 !important;
+}
+
+
+.post-item:not(.bopo-card):not(.cyber-card):hover .date{
+
+    background:
+        #168fc9 !important;
+
+    box-shadow:
+        0 3px 9px rgba(38,155,214,.25);
+}
+
+
+/* =========================================================
+   ⑦ 防止旧规则把时间线等卡片单独搞乱
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card) .title,
+.post-item:not(.bopo-card):not(.cyber-card) .desc,
+.post-item:not(.bopo-card):not(.cyber-card) .date{
+
+    float:none !important;
+
+    position:relative !important;
+
+    left:auto !important;
+
+    right:auto !important;
+
+    top:auto !important;
+
+    bottom:auto !important;
+
+    transform:none !important;
+}
+
+
+/* =========================================================
+   ⑧ 所有普通帖子内部统一垂直顺序
+
+   标题
+      ↓
+   描述
+      ↓
+   更新时间
+   ========================================================= */
+
+.post-item:not(.bopo-card):not(.cyber-card){
+
+    flex-direction:column !important;
+
+    align-items:stretch !important;
+
+    justify-content:flex-start !important;
+}
+
+
+/* =========================================================
+   ⑨ 手机端
+   ========================================================= */
+
+@media (max-width:700px){
+
+    .post-item:not(.bopo-card):not(.cyber-card){
+
+        width:100% !important;
+
+        margin-bottom:
+            14px !important;
+
+        padding:
+            19px 18px !important;
+
+        border-radius:
+            14px !important;
+    }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .title{
+
+        margin-bottom:
+            8px !important;
+
+        font-size:
+            16px !important;
+
+        line-height:
+            1.72 !important;
+    }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .desc{
+
+        margin-bottom:
+            11px !important;
+
+        font-size:
+            12px !important;
+
+        line-height:
+            1.72 !important;
+    }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .date{
+
+        margin-top:
+            0 !important;
+
+        padding:
+            5px 9px !important;
+
+        border-radius:
+            6px !important;
+
+        font-size:
+            9px !important;
+    }
+
+
+    .post-item:not(.bopo-card):not(.cyber-card) .date::before{
+
+        width:4px;
+
+        height:4px;
+
+        margin-right:6px;
+    }
+
+}
+
+
+/* =========================================================
+   ⑩ 桌面端
+   ========================================================= */
+
+@media (min-width:701px){
+
+    .post-item:not(.bopo-card):not(.cyber-card){
+
+        padding:
+            25px 30px !important;
+    }
+
+}
+
+
+/* =========================================================
+   END · DORAEMON BLUE
+   =========================================================
+
+
+/* =========================================================
+   DORAEMON × NEON
+   婆婆子灯牌 · SECRET GADGET SIGN
+   ========================================================= */
+
+
+/* =========================================================
+   ① 婆婆子主体
+   红色主灯 + 极淡哆啦A梦蓝辅助光
+   ========================================================= */
+
+.post-item.bopo-card{
+
+    /*
+       保持现在的高度
+    */
+
+    min-height:200px !important;
+
+    border-radius:16px !important;
+
+    /*
+       红色仍然是绝对主色
+
+       蓝色只存在于环境光里
+    */
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 50%,
+            rgba(255,45,45,.075),
+            transparent 60%
+        ),
+
+        /*
+           哆啦A梦蓝色辅助光
+           很淡
+        */
+
+        radial-gradient(
+            ellipse at 8% 50%,
+            rgba(38,155,214,.075),
+            transparent 38%
+        ),
+
+        radial-gradient(
+            ellipse at 92% 50%,
+            rgba(38,155,214,.045),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,0) 32%
+        ),
+
+        #171416 !important;
+
+
+    /*
+       红色霓虹主框
+    */
+
+    border:
+        2px solid #ff3038 !important;
+
+    box-shadow:
+
+        0 0 3px #ff3038,
+
+        0 0 8px #ff3038,
+
+        0 0 17px rgba(255,48,56,.88),
+
+        0 0 34px rgba(255,42,48,.58),
+
+        0 0 58px rgba(255,38,45,.30),
+
+        /*
+           极淡蓝色反光
+        */
+
+        0 0 85px rgba(38,155,214,.055),
+
+        inset 0 0 12px rgba(255,48,56,.12),
+
+        inset 0 0 30px rgba(255,48,56,.055);
+
+}
+
+
+/* =========================================================
+   ② 外层霓虹管
+   ========================================================= */
+
+.post-item.bopo-card::before{
+
+    border-radius:13px !important;
+
+    border:
+        1px solid rgba(255,100,90,.48) !important;
+
+    box-shadow:
+
+        0 0 5px rgba(255,55,55,.8),
+
+        0 0 14px rgba(255,45,45,.55),
+
+        0 0 28px rgba(255,45,45,.28),
+
+        /*
+           蓝色只在最外层轻轻混一点
+        */
+
+        0 0 38px rgba(38,155,214,.045) !important;
+}
+
+
+/* =========================================================
+   ③ 婆婆子文字
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text{
+
+    color:#fff8e8 !important;
+
+    /*
+       文字还是暖白
+    */
+
+    text-shadow:
+
+        0 0 1px #ffffff,
+
+        0 0 3px #ffffff,
+
+        0 0 7px rgba(255,255,250,1),
+
+        0 0 12px rgba(255,248,225,.96),
+
+        0 0 20px rgba(255,220,175,.72),
+
+        0 0 34px rgba(255,175,95,.42),
+
+        0 0 52px rgba(255,125,45,.20) !important;
+}
+
+
+/* =========================================================
+   ④ 两侧不再出现横线
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text::before,
+.post-item.bopo-card .bopo-text::after{
+
+    content:none !important;
+
+    display:none !important;
+}
+
+
+/* =========================================================
+   ⑤ 底部「个人存档 · 不定时更新」
+   直接隐藏
+   ========================================================= */
+
+.footer{
+
+    display:none !important;
+}
+
+
+/* =========================================================
+   ⑥ 哆啦A梦蓝色微弱 hover
+   ========================================================= */
+
+.post-item.bopo-card:hover{
+
+    box-shadow:
+
+        0 0 4px #ff3038,
+
+        0 0 10px #ff3038,
+
+        0 0 21px rgba(255,48,56,1),
+
+        0 0 42px rgba(255,42,48,.72),
+
+        0 0 72px rgba(255,38,45,.38),
+
+        /*
+           hover 时蓝色稍微出现
+        */
+
+        0 0 95px rgba(38,155,214,.09),
+
+        inset 0 0 15px rgba(255,48,56,.18),
+
+        inset 0 0 34px rgba(38,155,214,.035);
+
+}
+
+
+/* =========================================================
+   ⑦ 手机端
+   ========================================================= */
+
+@media (max-width:700px){
+
+    .post-item.bopo-card{
+
+        min-height:155px !important;
+
+        border-radius:14px !important;
+    }
+
+}
+
+
+/* =========================================================
+   婆婆子灯牌 · FINAL COLOR
+   深靛蓝玻璃 × 红色霓虹 × 暖白文字
+   只改配色，不改结构和灯效
+   ========================================================= */
+
+.post-item.bopo-card{
+
+    background:
+
+        /* 中心暖光 */
+        radial-gradient(
+            ellipse at 50% 48%,
+            rgba(255,92,82,.16),
+            transparent 52%
+        ),
+
+        /* 左侧哆啦A梦蓝 */
+        radial-gradient(
+            ellipse at 5% 50%,
+            rgba(55,145,210,.16),
+            transparent 40%
+        ),
+
+        /* 右侧蓝紫环境光 */
+        radial-gradient(
+            ellipse at 95% 30%,
+            rgba(95,82,190,.13),
+            transparent 42%
+        ),
+
+        /* 顶部玻璃反光 */
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.085),
+            rgba(255,255,255,0) 30%
+        ),
+
+        /* 主体：深靛蓝，不再是黑色 */
+        linear-gradient(
+            135deg,
+            #17283a 0%,
+            #182c43 45%,
+            #20233f 100%
+        ) !important;
+
+
+    border-color:
+        #ff3942 !important;
+
+
+    box-shadow:
+
+        0 0 4px #ff3942,
+
+        0 0 10px rgba(255,57,66,.95),
+
+        0 0 22px rgba(255,57,66,.72),
+
+        0 0 42px rgba(255,57,66,.40),
+
+        0 0 70px rgba(255,57,66,.18),
+
+        inset 0 0 18px rgba(255,57,66,.10),
+
+        inset 0 0 50px rgba(65,130,205,.08) !important;
+}
+
+
+/* 外框第二层 */
+
+.post-item.bopo-card::before{
+
+    border-color:
+        rgba(255,118,108,.62) !important;
+
+    box-shadow:
+
+        0 0 6px rgba(255,75,75,.85),
+
+        0 0 16px rgba(255,55,60,.55),
+
+        0 0 32px rgba(255,55,60,.25) !important;
+}
+
+
+/* 顶部玻璃反光 */
+
+.post-item.bopo-card::after{
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.82),
+            rgba(255,220,205,.9),
+            transparent
+        ) !important;
+
+    box-shadow:
+        0 0 8px rgba(255,100,90,.75) !important;
+}
+
+
+/* 婆婆子文字：暖白 */
+
+.post-item.bopo-card .bopo-text{
+
+    color:
+        #fff8eb !important;
+
+    text-shadow:
+
+        0 0 2px #ffffff,
+
+        0 0 6px #fff8eb,
+
+        0 0 13px rgba(255,245,225,.95),
+
+        0 0 25px rgba(255,100,75,.82),
+
+        0 0 42px rgba(255,65,55,.48),
+
+        0 0 68px rgba(255,55,50,.25) !important;
+}
+
+
+/* hover 仍然保持红色霓虹 */
+
+.post-item.bopo-card:hover{
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 48%,
+            rgba(255,95,85,.20),
+            transparent 52%
+        ),
+
+        radial-gradient(
+            ellipse at 5% 50%,
+            rgba(55,145,210,.19),
+            transparent 40%
+        ),
+
+        radial-gradient(
+            ellipse at 95% 30%,
+            rgba(100,85,200,.16),
+            transparent 42%
+        ),
+
+        linear-gradient(
+            135deg,
+            #1b3045 0%,
+            #1c334b 45%,
+            #252744 100%
+        ) !important;
+}
+
+
+/* =========================================================
+   婆婆子 · FLAT PINK NEON SIGN
+   扁平霓虹灯牌 / 经典霓虹粉
+   ========================================================= */
+
+
+/* =========================================================
+   灯牌主体
+   ========================================================= */
+
+.post-item.bopo-card{
+
+    /*
+       扁平，不做立体卡片
+    */
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(34,25,45,.96),
+            rgba(29,22,40,.96)
+        ) !important;
+
+    border:
+        2px solid #ff2d95 !important;
+
+    border-radius:
+        14px !important;
+
+    /*
+       重点：只有霓虹，没有“卡片投影”
+    */
+
+    box-shadow:
+
+        /* 灯管本身 */
+        0 0 3px #ffffff,
+
+        0 0 7px #ffb3df,
+
+        0 0 12px #ff2d95,
+
+        0 0 24px #ff2d95,
+
+        0 0 42px rgba(255,45,149,.90),
+
+        0 0 72px rgba(255,45,149,.58),
+
+        0 0 110px rgba(255,45,149,.30),
+
+        /* 很淡的内部染光 */
+        inset 0 0 16px rgba(255,45,149,.12) !important;
+
+    /*
+       去掉卡片“浮起来”的感觉
+    */
+
+    transform:
+        none;
+}
+
+
+/* =========================================================
+   外层故障霓虹边
+   ========================================================= */
+
+.post-item.bopo-card::before{
+
+    inset:
+        -8px !important;
+
+    border:
+        1px solid rgba(255,104,185,.72) !important;
+
+    border-radius:
+        16px !important;
+
+    box-shadow:
+
+        0 0 5px rgba(255,90,180,.95),
+
+        0 0 14px rgba(255,45,149,.90),
+
+        0 0 30px rgba(255,45,149,.72),
+
+        0 0 58px rgba(255,45,149,.38),
+
+        0 0 90px rgba(255,45,149,.20) !important;
+
+    opacity:
+        .78 !important;
+}
+
+
+/* =========================================================
+   顶部灯管反光
+   ========================================================= */
+
+.post-item.bopo-card::after{
+
+    left:
+        9% !important;
+
+    right:
+        9% !important;
+
+    top:
+        7px !important;
+
+    height:
+        1px !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.95),
+            rgba(255,210,240,.95),
+            rgba(255,255,255,.95),
+            transparent
+        ) !important;
+
+    box-shadow:
+        0 0 9px rgba(255,120,200,1),
+
+        0 0 18px rgba(255,45,149,.8) !important;
+
+    opacity:
+        .8 !important;
+}
+
+
+/* =========================================================
+   婆婆子文字
+   暖白灯芯 + 粉色霓虹外溢
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text{
+
+    color:
+        #fffaf5 !important;
+
+    /*
+       白色灯芯非常亮
+    */
+
+    text-shadow:
+
+        0 0 1px #ffffff,
+
+        0 0 3px #ffffff,
+
+        0 0 7px #fff8fc,
+
+        0 0 13px #ffffff,
+
+        /*
+           粉色霓虹外溢
+        */
+
+        0 0 22px #ffb4dc,
+
+        0 0 38px #ff4cab,
+
+        0 0 58px #ff2d95,
+
+        0 0 85px rgba(255,45,149,.85),
+
+        0 0 120px rgba(255,45,149,.42) !important;
+}
+
+
+/* =========================================================
+   去掉文字两侧装饰线
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text::before,
+.post-item.bopo-card .bopo-text::after{
+
+    display:
+        none !important;
+
+    content:
+        none !important;
+}
+
+
+/* =========================================================
+   hover
+   不是变成立体卡片
+   而是“霓虹突然通电”
+   ========================================================= */
+
+.post-item.bopo-card:hover{
+
+    transform:
+        none !important;
+
+    box-shadow:
+
+        0 0 3px #ffffff,
+
+        0 0 8px #ffffff,
+
+        0 0 14px #ffb3df,
+
+        0 0 28px #ff2d95,
+
+        0 0 50px #ff2d95,
+
+        0 0 85px rgba(255,45,149,.95),
+
+        0 0 125px rgba(255,45,149,.65),
+
+        0 0 170px rgba(255,45,149,.30),
+
+        inset 0 0 20px rgba(255,45,149,.15) !important;
+}
+
+
+.post-item.bopo-card:hover .bopo-text{
+
+    text-shadow:
+
+        0 0 1px #ffffff,
+
+        0 0 4px #ffffff,
+
+        0 0 9px #ffffff,
+
+        0 0 18px #fff,
+
+        0 0 30px #ffb4dc,
+
+        0 0 48px #ff4cab,
+
+        0 0 72px #ff2d95,
+
+        0 0 105px #ff2d95,
+
+        0 0 145px rgba(255,45,149,.85) !important;
+}
+
+
+/* =========================================================
+   手机端
+   ========================================================= */
+
+@media (max-width:700px){
+
+    .post-item.bopo-card{
+
+        border-radius:
+            12px !important;
+    }
+
+}
+
+
+/* =========================================================
+   婆婆子 · TOKYO PINK NEON
+   扁平霓虹招牌
+   ========================================================= */
+
+
+/* =========================================================
+   灯牌本体
+   ========================================================= */
+
+.post-item.bopo-card{
+
+    background:
+        #102c43 !important;
+
+    border:
+        3px solid #ff42ad !important;
+
+    border-radius:
+        10px !important;
+
+    /*
+       重点：
+       只让“边框”发光
+       不让整个盒子发光
+    */
+
+    box-shadow:
+
+        0 0 3px #ffffff,
+
+        0 0 7px #ffb7e2,
+
+        0 0 14px #ff42ad,
+
+        0 0 26px rgba(255,66,173,.72),
+
+        0 0 42px rgba(255,66,173,.32) !important;
+
+    /*
+       扁平
+       不浮起
+    */
+
+    transform:
+        none !important;
+}
+
+
+/* =========================================================
+   第二层霓虹管
+   不做大面积外发光
+   ========================================================= */
+
+.post-item.bopo-card::before{
+
+    inset:
+        -5px !important;
+
+    border:
+        1px solid rgba(255,126,203,.72) !important;
+
+    border-radius:
+        12px !important;
+
+    box-shadow:
+
+        0 0 4px #ff9dd3,
+
+        0 0 10px rgba(255,66,173,.85),
+
+        0 0 20px rgba(255,66,173,.45) !important;
+
+    opacity:
+        .9 !important;
+}
+
+
+/* =========================================================
+   顶部灯管反光
+   很细
+   ========================================================= */
+
+.post-item.bopo-card::after{
+
+    left:
+        12% !important;
+
+    right:
+        12% !important;
+
+    top:
+        8px !important;
+
+    height:
+        1px !important;
+
+    background:
+        rgba(255,220,242,.8) !important;
+
+    box-shadow:
+        0 0 5px #ff8ccc !important;
+
+    opacity:
+        .45 !important;
+}
+
+
+/* =========================================================
+   文字
+   暖白灯芯
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text{
+
+    color:
+        #fff9ef !important;
+
+    font-weight:
+        900 !important;
+
+    /*
+       白色灯芯非常清楚
+       粉色只是外围光
+    */
+
+    text-shadow:
+
+        0 0 1px #ffffff,
+
+        0 0 3px #ffffff,
+
+        0 0 6px #ffffff,
+
+        0 0 11px #fff2f9,
+
+        0 0 18px #ff8dcc,
+
+        0 0 30px rgba(255,66,173,.85),
+
+        0 0 48px rgba(255,66,173,.45) !important;
+}
+
+
+/* =========================================================
+   不要文字两侧装饰线
+   ========================================================= */
+
+.post-item.bopo-card .bopo-text::before,
+.post-item.bopo-card .bopo-text::after{
+
+    content:
+        none !important;
+
+    display:
+        none !important;
+}
+
+
+/* =========================================================
+   hover
+   只是“灯亮了一点”
+   不改变形状
+   ========================================================= */
+
+.post-item.bopo-card:hover{
+
+    transform:
+        none !important;
+
+    box-shadow:
+
+        0 0 4px #ffffff,
+
+        0 0 9px #ffffff,
+
+        0 0 16px #ffb7e2,
+
+        0 0 28px #ff42ad,
+
+        0 0 48px rgba(255,66,173,.85),
+
+        0 0 72px rgba(255,66,173,.38) !important;
+}
+
+
+.post-item.bopo-card:hover .bopo-text{
+
+    text-shadow:
+
+        0 0 1px #ffffff,
+
+        0 0 4px #ffffff,
+
+        0 0 8px #ffffff,
+
+        0 0 14px #fff,
+
+        0 0 22px #ffb0da,
+
+        0 0 36px #ff42ad,
+
+        0 0 55px rgba(255,66,173,.85) !important;
+}
+
+
+/* =========================================================
+   手机端
+   ========================================================= */
+
+@media (max-width:700px){
+
+    .post-item.bopo-card{
+
+        border-width:
+            2px !important;
+
+        border-radius:
+            9px !important;
+    }
+
 }
 
 </style>
@@ -599,6 +3141,20 @@ body {
 <div class="star s3">✦</div>
 
 <div class="container">
+
+    <!-- =====================================================
+         婆婆子：异次元入口 / 主档案断层
+         ===================================================== -->
+
+    <div class="dimension-divider" aria-hidden="true">
+
+        <span class="divider-line left"></span>
+
+        <span class="divider-symbol">◇</span>
+
+        <span class="divider-line right"></span>
+
+    </div>
 
     <header class="header">
 
@@ -634,73 +3190,139 @@ body {
 <script>
 
 const postsData = [
-{
-                title: "我只想说明真相，也不带任何rrgj。该给的体面已经给了。不明真相的请看此楼。",
-                link: "我只想说明真相，也不带任何rrgj。该给的体面已经给了。不明真相的请看此楼。/1.html",
-                date: "2026-08-08 16:27:52",
-                desc: "已备份😎，休想春秋笔法"
-            },
-            {
-                title: "开一个两个人互送礼物的记录楼吧（更新至260717）",
-                link: "开一个两个人互送礼物的记录楼吧（更新至260717）/1.html",
-                date: "2026-08-02 22:28:13",
-                desc: "已备份😎，休想春秋笔法"
-            },
+    {
+        title: "7.29直播楼",
+        link: "7.29直播楼/1.html",
+        date: "2026-07-30 10:24:07",
+        desc: "已备份😎，休想春秋笔法"
+    },
+    {
+        title: "我只想说明真相，也不带任何rrgj。该给的体面已经给了。不明真相的请看此楼。",
+        link: "我只想说明真相，也不带任何rrgj。该给的体面已经给了。不明真相的请看此楼。/1.html",
+        date: "2026-08-08 16:27:52",
+        desc: "已备份😎，休想春秋笔法"
+    },
+    {
+        title: "开一个两个人互送礼物的记录楼吧（更新至260717）",
+        link: "开一个两个人互送礼物的记录楼吧（更新至260717）/1.html",
+        date: "2026-08-02 22:28:13",
+        desc: "已备份😎，休想春秋笔法"
+    },
+
+    /* =====================================================
+       婆婆子：固定置顶
+       不再使用 9999-99-99 这种假日期
+       ===================================================== */
+
     {
         title: "婆婆子cyberpunk",
         link: "婆婆子cyberpunk/1.html",
-        date: "9999-99-99 99:99:99",
-        desc: "胡言乱语发疯中"
+        special: true
     },
-                                        {
-                title: "又咯噔上了姐妹",
-                link: "又咯噔上了姐妹/1.html",
-                date: "2026-08-21 21:58:03",
-                desc: "已备份😎，休想春秋笔法"
-            },
-                {
-                title: "想跟xxx说",
-                link: "想跟xxx说/1.html",
-                date: "2026-08-21 07:58:24",
-                desc: "已备份😎，休想春秋笔法"
-            },
+
+    {
+        title: "又咯噔上了姐妹",
+        link: "又咯噔上了姐妹/1.html",
+        date: "2026-08-21 21:58:03",
+        desc: "已备份😎，休想春秋笔法"
+    },
+    {
+        title: "想跟xxx说",
+        link: "想跟xxx说/1.html",
+        date: "2026-08-21 07:58:24",
+        desc: "已备份😎，休想春秋笔法"
+    },
     {
         title: "时间线",
         link: "时间线原版/时间线.html",
         date: "2026-08-03 14:00:44",
         desc: "被下架后恢复的5页长帖，共443条评论"
     }
-        ];
+];
+
+/* =========================================================
+   排序：
+   1. pinned === true 的帖子永远第一
+   2. 其他帖子按照最后更新时间从新到旧
+   ========================================================= */
 
 function render() {
 
     const list = document.getElementById("postList");
 
-    const sorted = [...postsData].sort(
-        (a, b) =>
-            new Date(b.date) -
-            new Date(a.date)
+    const specialPost = postsData.find(
+        p => p.title === "婆婆子cyberpunk"
     );
 
-    list.innerHTML = sorted.map(p => `
-        <a class="post-item" href="${p.link}">
+    const normalPosts = postsData
+        .filter(p => p.title !== "婆婆子cyberpunk")
+        .sort(
+            (a, b) =>
+                new Date(b.date) -
+                new Date(a.date)
+        );
 
-            <div class="title">
-                ${p.title}
-            </div>
+    let html = "";
+
+    // 婆婆子永远置顶
+    if (specialPost) {
+        html += `
+            <a class="post-item bopo-card"
+               href="${specialPost.link}">
+
+                <div class="bopo-text">
+                    真実はいつもひとつ！
+                </div>
+
+            </a>
+        `;
+    }
+
+    // 其他帖子继续按照最后更新时间排序
+    html += normalPosts.map(p => `
+        <a class="post-item ${p.special ? "cyber-card" : ""}" href="${p.link}">
 
             ${
-                p.desc
-                ? `<div class="desc">${p.desc}</div>`
-                : ""
-            }
+                p.special
+                ? `<div class="cyber-text">真実はいつもひとつ！</div>`
+                : `
+                    <div class="title">
+                        ${p.title}
+                    </div>
 
-            <div class="date">
-                最后更新 · ${p.date}
-            </div>
+                    ${
+                        p.desc
+                        ? `<div class="desc">${p.desc}</div>`
+                        : ""
+                    }
+
+                    <div class="date">
+                        最后更新 · ${p.date}
+                    </div>
+                `
+            }
 
         </a>
     `).join("");
+
+    list.innerHTML = html;
+
+    /*
+     * 婆婆子灯牌置于首页最顶部
+     * 顺序：
+     * 婆婆子
+     * 来日方长
+     * MEMORY ARCHIVE
+     * 普通帖子
+     */
+
+    const bopoCard = list.querySelector(".bopo-card");
+    const header = document.querySelector(".header");
+    const container = document.querySelector(".container");
+
+    if (bopoCard && header && container) {
+        container.insertBefore(bopoCard, header);
+    }
 
     document.getElementById("postCount").textContent =
         postsData.length;
